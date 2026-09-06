@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калейдоскоп</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0a0a12; }
+  #c { display: block; width: 100vw; height: 100vh; touch-action: none; cursor: crosshair; }
+
+  #ui {
+    position: fixed; top: 14px; left: 14px; z-index: 10;
+    width: 244px; padding: 16px 16px 14px;
+    background: rgba(18,18,28,.72);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.09); border-radius: 14px;
+    font: 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #e8e8f0; user-select: none;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+  #ui.hidden { transform: translateX(-280px); opacity: 0; pointer-events: none; }
+  #ui h1 {
+    margin: 0 0 6px; font-size: 14px; letter-spacing: .5px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #ui h1 .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: conic-gradient(red, orange, yellow, lime, cyan, blue, magenta, red);
+  }
+  label.row {
+    display: block; margin: 12px 0 4px; color: #9a9ab0;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .6px;
+  }
+  .val { color: #e8e8f0; float: right; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: #7c7cff; margin: 0; }
+  input[type=color] {
+    width: 100%; height: 30px; border: none; border-radius: 8px;
+    background: none; cursor: pointer; padding: 0;
+  }
+  .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 10px; margin-top: 12px; }
+  .checks label { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #cfcfe0; cursor: pointer; }
+  .checks input { accent-color: #7c7cff; }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+  button {
+    appearance: none; border: 1px solid rgba(255,255,255,.12); border-radius: 9px;
+    padding: 9px 6px; font: inherit; font-size: 12px; color: #e8e8f0;
+    background: rgba(255,255,255,.06); cursor: pointer; transition: background .15s;
+  }
+  button:hover { background: rgba(255,255,255,.14); }
+  button.primary { background: #5b5bff; border-color: #7c7cff; }
+  button.primary:hover { background: #6d6dff; }
+  .hint { margin-top: 12px; font-size: 11px; color: #74748a; line-height: 1.55; }
+  .hint b { color: #b6b6cc; }
+
+  #toggle {
+    position: fixed; top: 14px; left: 14px; z-index: 9; width: 36px; height: 36px;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(18,18,28,.72);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.09); border-radius: 10px; cursor: pointer;
+    color: #e8e8f0; font-size: 15px;
+  }
+  #ui.hidden ~ #toggle { display: flex; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="ui">
+  <h1><span class="dot"></span>Калейдоскоп</h1>
+
+  <label class="row">Оси симметрии <span class="val" id="segV">8</span></label>
+  <input type="range" id="seg" min="2" max="24" step="1" value="8">
+
+  <label class="row">Толщина кисти <span class="val" id="sizeV">6</span></label>
+  <input type="range" id="size" min="1" max="40" step="1" value="6">
+
+  <label class="row">Оттенок <span class="val" id="hueV">210</span></label>
+  <input type="range" id="hue" min="0" max="360" step="1" value="210">
+
+  <label class="row">Вращение фона <span class="val" id="spinV">0.4</span></label>
+  <input type="range" id="spin" min="0" max="3" step="0.1" value="0.4">
+
+  <div class="checks">
+    <label><input type="checkbox" id="mirror" checked> Зеркало</label>
+    <label><input type="checkbox" id="rainbow"> Радуга</label>
+    <label><input type="checkbox" id="fade"> Затухание</label>
+    <label><input type="checkbox" id="glow" checked> Свечение</label>
+  </div>
+
+  <div class="btns">
+    <button id="clear">Очистить</button>
+    <button id="save" class="primary">Сохранить PNG</button>
+  </div>
+
+  <div class="hint">
+    Веди мышкой по холсту.<br>
+    <b>H</b> — спрятать панель · <b>C</b> — очистить · <b>Пробел</b> — авто&#8209;узор
+  </div>
+</div>
+<div id="toggle">&#9776;</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var c = document.getElementById("c");
+  var ctx = c.getContext("2d");
+  var buf = document.createElement("canvas");
+  var bx = buf.getContext("2d");
+
+  var ui = document.getElementById("ui");
+  var toggleEl = document.getElementById("toggle");
+  var segEl = document.getElementById("seg");
+  var sizeEl = document.getElementById("size");
+  var hueEl = document.getElementById("hue");
+  var spinEl = document.getElementById("spin");
+  var mirrorEl = document.getElementById("mirror");
+  var rainbowEl = document.getElementById("rainbow");
+  var fadeEl = document.getElementById("fade");
+  var glowEl = document.getElementById("glow");
+
+  var W = 0, H = 0, DPR = 1;
+  var spinAngle = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var docEl = document.documentElement;
+    W = window.innerWidth || docEl.clientWidth || 1024;
+    H = window.innerHeight || docEl.clientHeight || 720;
+
+    var old = null;
+    if (buf.width && buf.height) {
+      old = document.createElement("canvas");
+      old.width = buf.width;
+      old.height = buf.height;
+      old.getContext("2d").drawImage(buf, 0, 0);
+    }
+
+    c.width = Math.floor(W * DPR);
+    c.height = Math.floor(H * DPR);
+    buf.width = c.width;
+    buf.height = c.height;
+
+    if (old) {
+      bx.setTransform(1, 0, 0, 1, 0, 0);
+      bx.drawImage(old, (buf.width - old.width) / 2, (buf.height - old.height) / 2);
+    }
+    bx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  // Draw one segment-replicated stroke from a to b (center-relative CSS pixels).
+  function stroke(a, b) {
+    var seg = +segEl.value;
+    var size = +sizeEl.value;
+    var hue = rainbowEl.checked ? (performance.now() / 18) % 360 : +hueEl.value;
+    var col = "hsl(" + hue + " 85% 60%)";
+    var step = (Math.PI * 2) / seg;
+
+    bx.save();
+    bx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    bx.translate(W / 2, H / 2);
+    bx.lineCap = "round";
+    bx.lineJoin = "round";
+    bx.strokeStyle = col;
+    bx.fillStyle = col;
+    bx.lineWidth = size;
+    if (glowEl.checked) {
+      bx.shadowColor = col;
+      bx.shadowBlur = size * 1.5;
+    }
+
+    for (var i = 0; i < seg; i++) {
+      bx.save();
+      bx.rotate(i * step);
+      segLine(a, b, size);
+      if (mirrorEl.checked) {
+        bx.save();
+        bx.scale(1, -1);
+        segLine(a, b, size);
+        bx.restore();
+      }
+      bx.restore();
+    }
+    bx.restore();
+  }
+
+  function segLine(a, b, size) {
+    bx.beginPath();
+    bx.moveTo(a.x, a.y);
+    bx.lineTo(b.x, b.y);
+    bx.stroke();
+    bx.beginPath();
+    bx.arc(b.x, b.y, size / 2, 0, Math.PI * 2);
+    bx.fill();
+  }
+
+  function render() {
+    requestAnimationFrame(render);
+
+    if (!buf.width || !buf.height) {
+      if (window.innerWidth) resize();
+      return;
+    }
+
+    spinAngle += parseFloat(spinEl.value) * 0.0025;
+
+    if (fadeEl.checked) {
+      bx.setTransform(1, 0, 0, 1, 0, 0);
+      bx.fillStyle = "rgba(10,10,18,0.05)";
+      bx.fillRect(0, 0, buf.width, buf.height);
+      bx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+
+    autoStep();
+
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = "#0a0a12";
+    ctx.fillRect(0, 0, c.width, c.height);
+    ctx.save();
+    ctx.translate(c.width / 2, c.height / 2);
+    ctx.rotate(spinAngle);
+    ctx.drawImage(buf, -buf.width / 2, -buf.height / 2);
+    ctx.restore();
+  }
+
+  // ---- pointer input -------------------------------------------------------
+  var drawing = false, lastX = 0, lastY = 0;
+
+  function toBuf(clientX, clientY) {
+    var rect = c.getBoundingClientRect();
+    var px = clientX - rect.left - W / 2;
+    var py = clientY - rect.top - H / 2;
+    var cos = Math.cos(-spinAngle), sin = Math.sin(-spinAngle);
+    return { x: px * cos - py * sin, y: px * sin + py * cos };
+  }
+
+  c.addEventListener("pointerdown", function (e) {
+    drawing = true;
+    try { c.setPointerCapture(e.pointerId); } catch (err) {}
+    var p = toBuf(e.clientX, e.clientY);
+    lastX = p.x; lastY = p.y;
+    stroke({ x: lastX, y: lastY }, { x: lastX + 0.01, y: lastY });
+  });
+
+  c.addEventListener("pointermove", function (e) {
+    if (!drawing) return;
+    var p = toBuf(e.clientX, e.clientY);
+    var dx = p.x - lastX, dy = p.y - lastY;
+    if (dx * dx + dy * dy < 4) return;
+    stroke({ x: lastX, y: lastY }, p);
+    lastX = p.x; lastY = p.y;
+  });
+
+  function endStroke() { drawing = false; }
+  c.addEventListener("pointerup", endStroke);
+  c.addEventListener("pointercancel", endStroke);
+  c.addEventListener("pointerleave", endStroke);
+
+  // ---- auto-doodle ------------------------------------------------------
+  var auto = false, ax = 0, ay = 0, at = 0;
+  function autoStep() {
+    if (!auto) return;
+    at += 0.02;
+    var nx = Math.cos(at * 1.3) * (W * 0.30) + Math.cos(at * 0.7) * (W * 0.12);
+    var ny = Math.sin(at * 1.1) * (H * 0.30) + Math.sin(at * 2.1) * (H * 0.10);
+    stroke({ x: ax, y: ay }, { x: nx, y: ny });
+    ax = nx; ay = ny;
+  }
+
+  // ---- actions -----------------------------------------------------------
+  function clearAll() {
+    bx.setTransform(1, 0, 0, 1, 0, 0);
+    bx.clearRect(0, 0, buf.width, buf.height);
+    bx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function savePNG() {
+    if (!buf.width || !buf.height) return;
+    var flat = document.createElement("canvas");
+    flat.width = c.width;
+    flat.height = c.height;
+    var fx = flat.getContext("2d");
+    fx.fillStyle = "#0a0a12";
+    fx.fillRect(0, 0, flat.width, flat.height);
+    fx.translate(flat.width / 2, flat.height / 2);
+    fx.rotate(spinAngle);
+    fx.drawImage(buf, -buf.width / 2, -buf.height / 2);
+    var a = document.createElement("a");
+    a.download = "kaleidoscope-" + Date.now() + ".png";
+    a.href = flat.toDataURL("image/png");
+    a.click();
+  }
+
+  document.getElementById("clear").addEventListener("click", clearAll);
+  document.getElementById("save").addEventListener("click", savePNG);
+  toggleEl.addEventListener("click", function () { ui.classList.remove("hidden"); });
+
+  window.addEventListener("keydown", function (e) {
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (e.code === "KeyH") ui.classList.toggle("hidden");
+    else if (e.code === "KeyC") clearAll();
+    else if (e.code === "Space") { e.preventDefault(); auto = !auto; }
+  });
+
+  // live value labels
+  [["seg", "segV"], ["size", "sizeV"], ["hue", "hueV"], ["spin", "spinV"]].forEach(function (p) {
+    var input = document.getElementById(p[0]);
+    var out = document.getElementById(p[1]);
+    var sync = function () { out.textContent = input.value; };
+    input.addEventListener("input", sync);
+    sync();
+  });
+
+  // ---- starter flourish so the canvas isn't empty on open --------------
+  function seed() {
+    if (!buf.width || !buf.height) return;
+    var h0 = +hueEl.value;
+    var R = Math.min(W, H) * 0.16;
+    for (var k = 0; k < 40; k++) {
+      hueEl.value = Math.round((h0 + k * 5) % 360);
+      var a = k / 40 * Math.PI * 2;
+      var a2 = a + 0.6;
+      stroke(
+        { x: Math.cos(a) * R, y: Math.sin(a) * R },
+        { x: Math.cos(a2) * R * 1.6, y: Math.sin(a2) * R * 1.6 }
+      );
+    }
+    hueEl.value = h0;
+    document.getElementById("hueV").textContent = h0;
+  }
+
+  window.addEventListener("resize", resize);
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      var iw = window.innerWidth || 0, ih = window.innerHeight || 0;
+      if (iw && ih && (Math.abs(iw - W) > 1 || Math.abs(ih - H) > 1)) resize();
+    }).observe(document.documentElement);
+  }
+  resize();
+  seed();
+  requestAnimationFrame(render);
+})();
+</script>
+</body>
+</html>
