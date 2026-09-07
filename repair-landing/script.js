@@ -7,7 +7,7 @@
 // Ключ доступа Web3Forms. Получить бесплатно и без регистрации на
 // https://web3forms.com — ввести адрес deadinside23200821@gmail.com,
 // ключ придёт на эту почту. Вставьте его сюда вместо текста-заглушки:
-const WEB3FORMS_ACCESS_KEY = "88cc7828-08db-44af-aa58-560dbd46b3ea";
+const WEB3FORMS_ACCESS_KEY = "cb766013-6d44-4709-812b-e18d52deaa0b";
 
 // Запускаемся, когда DOM готов. Если скрипт подключён с defer, DOM обычно уже
 // разобран — тогда вызываем init() сразу, иначе ждём событие DOMContentLoaded.
