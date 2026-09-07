@@ -1,0 +1,451 @@
+/* =========================================================================
+   Ремонт на дому — стили лендинга
+   Подход: mobile-first (сначала пишем для телефона, потом @media на широкие
+   экраны). Цвета и отступы вынесены в переменные — их удобно менять в одном
+   месте.
+   ========================================================================= */
+
+/* --- Переменные темы --------------------------------------------------- */
+:root {
+  /* Акцент — тёплый оранжевый, как на логотипе Claude */
+  --accent:        #d97757;   /* фирменный оранжевый: кнопки, иконки, цифры */
+  --accent-dark:   #c15f3c;   /* тот же оттенок темнее — для :hover */
+  --accent-soft:   #f8ebe3;   /* бледно-персиковая подложка (иконки, подсветка) */
+  --link:          #a8492a;   /* текстовые ссылки: темнее, чтобы читались на сером */
+
+  /* Нейтральные — тёплый серый */
+  --text:          #211d1a;   /* основной текст */
+  --muted:         #6a6259;   /* второстепенный текст */
+  --bg:            #eceae7;   /* фон страницы — приятный тёплый серый */
+  --panel:         #ffffff;   /* «поднятые» поверхности: карточки, поля ввода */
+  --surface:       #e3e0da;   /* фон чередующихся секций (чуть глубже фона) */
+  --border:        #dad5cd;   /* линии и рамки */
+
+  --radius:        12px;      /* скругление углов */
+  --maxw:          1080px;    /* максимальная ширина контента */
+  --shadow:        0 1px 2px rgba(41, 33, 27, .06),
+                   0 10px 30px rgba(41, 33, 27, .07);
+
+  color-scheme: light;
+}
+
+/* --- Базовый сброс --------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--link); }
+a:hover { color: var(--accent-dark); }
+
+h1, h2, h3, p { margin: 0 0 .6em; }
+
+/* Одинаковая внутренняя «рамка» контента для всех секций */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+.container--narrow { max-width: 760px; }
+
+/* Чтобы «липкая» шапка не перекрывала заголовок при переходе по якорю */
+section[id] { scroll-margin-top: 84px; }
+
+/* =========================================================================
+   Кнопки
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn--primary:hover { background: var(--accent-dark); color: #fff; }
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn--sm  { padding: 10px 16px; }
+.btn--block { width: 100%; }
+.btn:disabled { opacity: .6; cursor: progress; }
+
+/* Заметная рамка фокуса для доступности (клавиатура) */
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   Шапка
+   ========================================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(236, 234, 231, .85);   /* полупрозрачный фон в цвет страницы (--bg) */
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 64px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .45em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand__mark {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.nav {
+  display: none;              /* на телефоне навигацию прячем */
+  margin-left: auto;
+  gap: 22px;
+}
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav a:hover { color: var(--text); }
+
+/* Кнопка «Оставить заявку» в шапке: прижата вправо, пока нет .nav */
+.site-header .btn--sm { margin-left: auto; }
+
+@media (min-width: 760px) {
+  .nav { display: flex; }
+  .site-header .btn--sm { margin-left: 0; }
+}
+
+/* =========================================================================
+   Главный экран
+   ========================================================================= */
+.hero {
+  background:
+    radial-gradient(60% 120% at 80% -10%, var(--accent-soft), transparent 60%);
+  border-bottom: 1px solid var(--border);
+}
+.hero__inner {
+  padding-block: clamp(48px, 9vw, 96px);
+  max-width: 760px;
+}
+.hero__title {
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.hero__subtitle {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  color: var(--muted);
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+.hero__note {
+  margin-top: 18px;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* =========================================================================
+   Секции общего вида
+   ========================================================================= */
+.section { padding-block: clamp(48px, 8vw, 88px); }
+.section--muted {
+  background: var(--surface);
+  border-block: 1px solid var(--border);
+}
+.section__title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  letter-spacing: -0.01em;
+}
+.section__lead {
+  max-width: 620px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* --- Обо мне --------------------------------------------------------- */
+.about { display: grid; gap: 28px; }
+.about__text p { color: var(--muted); }
+.about__text strong { color: var(--text); }
+
+.stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.stats__item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 14px;
+  text-align: center;
+}
+.stats__num {
+  display: block;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  font-weight: 700;
+  color: var(--accent);
+}
+.stats__label {
+  font-size: .9rem;
+  color: var(--muted);
+}
+
+@media (min-width: 820px) {
+  .about {
+    grid-template-columns: 1.6fr 1fr;
+    align-items: start;
+    gap: 40px;
+  }
+}
+
+/* --- Карточки преимуществ ------------------------------------------- */
+.cards {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+  /* auto-fit + minmax = карточки сами переносятся на новую строку,
+     когда перестают помещаться. Без медиазапросов. */
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.card__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.card__icon svg { width: 24px; height: 24px; }
+.card__title { font-size: 1.1rem; }
+.card__text { margin: 0; color: var(--muted); font-size: .97rem; }
+
+/* =========================================================================
+   Форма заявки
+   ========================================================================= */
+.lead-form {
+  max-width: 560px;
+  display: grid;
+  gap: 18px;
+}
+.field { display: grid; gap: 6px; }
+.field label { font-weight: 600; font-size: .95rem; }
+
+/* Honeypot — поле-ловушка для ботов, для людей полностью скрыто */
+.honeypot { display: none; }
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.field textarea { resize: vertical; min-height: 110px; }
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* Состояние ошибки: подсвечиваем поле и показываем текст */
+.field--error input,
+.field--error textarea { border-color: #dc2626; }
+.field__error {
+  margin: 0;
+  font-size: .87rem;
+  color: #dc2626;
+}
+
+.lead-form__hint {
+  margin: -4px 0 0;
+  font-size: .85rem;
+  color: var(--muted);
+}
+.lead-form__alt {
+  margin: 4px 0 0;
+  font-size: .95rem;
+  color: var(--muted);
+}
+
+/* Сообщение после отправки */
+.form-status {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: .95rem;
+  background: var(--accent-soft);
+  border: 1px solid #ecd7ca;
+  color: var(--link);
+}
+.form-status--error {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* =========================================================================
+   Частые вопросы (details/summary)
+   ========================================================================= */
+.faq {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  overflow: hidden;
+}
+.faq__item { border-top: 1px solid var(--border); }
+.faq__item:first-child { border-top: none; }
+
+.faq__item summary {
+  list-style: none;              /* убираем стандартный треугольник */
+  cursor: pointer;
+  padding: 18px 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+
+/* Свой индикатор «+», который превращается в «−» при открытии.
+   Единственная анимация на странице — поворот на 45°. */
+.faq__item summary::after {
+  content: "+";
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--accent);
+  transition: transform .15s ease;
+}
+.faq__item[open] summary::after { transform: rotate(45deg); }
+
+.faq__answer {
+  padding: 0 20px 18px;
+  color: var(--muted);
+}
+.faq__answer p { margin: 0; }
+
+/* =========================================================================
+   Футер
+   ========================================================================= */
+.site-footer {
+  background: var(--text);
+  color: #c9c1b7;
+  padding-top: 44px;
+}
+.site-footer a { color: #fff; }
+.site-footer a:hover { color: var(--accent-soft); }
+
+.site-footer__inner {
+  display: grid;
+  gap: 28px;
+  padding-bottom: 32px;
+}
+.brand--footer { color: #fff; font-size: 1rem; }
+.site-footer__muted { color: #a39a8f; margin: 0; max-width: 32ch; }
+
+.contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font-size: .96rem;
+}
+
+.site-footer__bottom {
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  padding-block: 18px;
+  font-size: .85rem;
+  color: #a39a8f;
+}
+
+@media (min-width: 720px) {
+  .site-footer__inner { grid-template-columns: 1fr 1fr; }
+}
+
+/* =========================================================================
+   Уважение к настройке «уменьшить движение»
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

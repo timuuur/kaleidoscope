@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport: обязательная строка для адаптивной вёрстки под телефон -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ремонт ноутбуков и телефонов на дому — выезд мастера</title>
+  <meta name="description" content="Частный мастер: ремонт ноутбуков и телефонов с выездом на дом. Бесплатная диагностика, ремонт за один визит, гарантия до 6 месяцев.">
+
+  <!-- Подключаем внешний файл стилей -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ШАПКА ------------------------------------------------------------ -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#top">
+        <span class="brand__mark" aria-hidden="true">⚙</span>
+        Мастер&nbsp;на&nbsp;дом
+      </a>
+
+      <!-- Навигация по секциям. На узких экранах прячется через CSS. -->
+      <nav class="nav" aria-label="Разделы страницы">
+        <a href="#about">Обо мне</a>
+        <a href="#benefits">Преимущества</a>
+        <a href="#faq">Вопросы</a>
+      </nav>
+
+      <a class="btn btn--primary btn--sm" href="#form">Оставить заявку</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ГЛАВНЫЙ ЭКРАН ------------------------------------------------- -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <h1 class="hero__title">
+          Ремонт ноутбуков и телефонов у вас дома
+        </h1>
+        <p class="hero__subtitle">
+          Приеду в удобное время, проведу диагностику бесплатно и починю технику
+          за один визит. Письменная гарантия на работу — до 6 месяцев.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#form">Оставить заявку</a>
+          <!-- TODO: замените номер на свой (и в footer, и в script.js) -->
+          <a class="btn btn--ghost" href="tel:+79000000000">Позвонить: +7&nbsp;900&nbsp;000-00-00</a>
+        </div>
+
+        <p class="hero__note">
+          Выезд по городу и ближайшим районам · Работаю ежедневно с 9:00 до 21:00
+        </p>
+      </div>
+    </section>
+
+    <!-- ОБО МНЕ ----------------------------------------------------- -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section__title">Обо мне</h2>
+        <div class="about">
+          <div class="about__text">
+            <!-- TODO: подставьте своё имя -->
+            <p>
+              Меня зовут <strong>Алексей</strong>. Ремонтом техники занимаюсь более
+              8 лет: начинал в сервисном центре, последние 5 лет работаю частным
+              мастером с выездом на дом. За это время починил больше 3000 устройств —
+              от замены разбитых экранов и аккумуляторов до пайки материнских плат
+              и восстановления данных.
+            </p>
+            <p>
+              Работаю по договору, выдаю чек и гарантийный талон. Использую
+              оригинальные и качественные совместимые запчасти — вариант всегда
+              согласую с вами заранее, никаких «сюрпризов» в счёте.
+            </p>
+          </div>
+
+          <ul class="stats" aria-label="Коротко о работе">
+            <li class="stats__item">
+              <span class="stats__num">8+</span>
+              <span class="stats__label">лет опыта</span>
+            </li>
+            <li class="stats__item">
+              <span class="stats__num">3000+</span>
+              <span class="stats__label">ремонтов</span>
+            </li>
+            <li class="stats__item">
+              <span class="stats__num">6 мес.</span>
+              <span class="stats__label">гарантия</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА ----------------------------------------------- -->
+    <section id="benefits" class="section section--muted">
+      <div class="container">
+        <h2 class="section__title">Почему обращаются ко мне</h2>
+
+        <ul class="cards">
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>
+              </svg>
+            </span>
+            <h3 class="card__title">Выезд на дом</h3>
+            <p class="card__text">
+              Приеду в течение 1–2 часов по городу. Не нужно никуда везти технику
+              и стоять в очереди в сервисе.
+            </p>
+          </li>
+
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+              </svg>
+            </span>
+            <h3 class="card__title">Диагностика бесплатно</h3>
+            <p class="card__text">
+              Осмотрю устройство, назову точную причину поломки и стоимость. Если
+              ремонт невыгоден — честно скажу об этом.
+            </p>
+          </li>
+
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 4 14h7l-1 8 9-12h-7z"/>
+              </svg>
+            </span>
+            <h3 class="card__title">Ремонт за один визит</h3>
+            <p class="card__text">
+              Частые поломки — замена экрана, батареи, разъёма зарядки, чистка от
+              пыли — делаю на месте за 30–60 минут.
+            </p>
+          </li>
+
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>
+              </svg>
+            </span>
+            <h3 class="card__title">Гарантия на ремонт</h3>
+            <p class="card__text">
+              Даю письменную гарантию до 6 месяцев на выполненные работы и
+              установленные запчасти.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ФОРМА ЗАЯВКИ --------------------------------------------- -->
+    <section id="form" class="section">
+      <div class="container">
+        <h2 class="section__title">Оставьте заявку</h2>
+        <p class="section__lead">
+          Опишите, что случилось с техникой. Перезвоню в течение 15 минут, уточню
+          детали и назову примерную стоимость.
+        </p>
+
+        <!--
+          novalidate — отключаем встроенные всплывающие подсказки браузера,
+          чтобы показывать свои сообщения об ошибках из script.js.
+        -->
+        <form class="lead-form" id="lead-form" novalidate>
+          <div class="field">
+            <label for="name">Имя</label>
+            <input type="text" id="name" name="name" autocomplete="name"
+                   placeholder="Как к вам обращаться" required>
+            <p class="field__error" data-error-for="name" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel"
+                   placeholder="+7 900 000-00-00" required>
+            <p class="field__error" data-error-for="phone" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="comment">Что сломалось?</label>
+            <textarea id="comment" name="comment" rows="4"
+                      placeholder="Например: не включается ноутбук Acer, до этого залил чаем"></textarea>
+          </div>
+
+          <!--
+            Ловушка для спам-ботов (honeypot). Живой человек это поле не видит
+            (спрятано в CSS) и не заполняет; бот часто заполняет всё подряд —
+            тогда Web3Forms отклонит заявку. tabindex=-1 и aria-hidden убирают
+            поле с пути клавиатуры и скринридеров.
+          -->
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <button type="submit" class="btn btn--primary btn--block">Отправить заявку</button>
+
+          <p class="lead-form__hint">
+            Нажимая кнопку, вы соглашаетесь на обработку персональных данных.
+          </p>
+
+          <!-- Сюда JS выведет результат отправки. aria-live — чтобы читалка озвучила. -->
+          <p class="form-status" id="form-status" role="status" aria-live="polite" hidden></p>
+
+          <p class="lead-form__alt">
+            Не хотите заполнять форму? Напишите в мессенджер:
+            <a href="https://t.me/obrecchhen">Telegram</a> ·
+            <!-- TODO: подставьте свою ссылку на WhatsApp -->
+            <a href="https://wa.me/79000000000">WhatsApp</a>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ЧАСТЫЕ ВОПРОСЫ ----------------------------------------- -->
+    <section id="faq" class="section section--muted">
+      <div class="container container--narrow">
+        <h2 class="section__title">Частые вопросы</h2>
+
+        <!-- <details>/<summary> — родная HTML-«гармошка», без JavaScript -->
+        <div class="faq">
+          <details class="faq__item">
+            <summary>Сколько стоит выезд и диагностика?</summary>
+            <div class="faq__answer">
+              <p>
+                Выезд и диагностика бесплатны, если вы соглашаетесь на ремонт. Если
+                после осмотра решаете не чинить — выезд 500 ₽ за потраченное время
+                и дорогу.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Как быстро вы приедете?</summary>
+            <div class="faq__answer">
+              <p>
+                Обычно в день обращения, в течение 1–2 часов. Можно записаться
+                заранее на удобное время, включая вечер и выходные.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Вы даёте гарантию?</summary>
+            <div class="faq__answer">
+              <p>
+                Да. На работы и запчасти — письменная гарантия от 1 до 6 месяцев
+                в зависимости от типа ремонта. Гарантийный талон выдаю на месте.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Какие поломки вы чините?</summary>
+            <div class="faq__answer">
+              <p>
+                Замена экранов, стёкол, аккумуляторов и разъёмов зарядки; чистка
+                и замена термопасты; ремонт после воды; восстановление данных;
+                замена клавиатур и петель на ноутбуках; удаление вирусов и
+                переустановка системы.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Как и когда платить?</summary>
+            <div class="faq__answer">
+              <p>
+                Наличными или переводом на карту — после того, как вы проверите,
+                что всё работает. Предоплату беру только за редкие запчасти и
+                всегда по договорённости.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ФУТЕР С КОНТАКТАМИ -------------------------------------- -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__col">
+        <p class="brand brand--footer">
+          <span class="brand__mark" aria-hidden="true">⚙</span>
+          Мастер&nbsp;на&nbsp;дом
+        </p>
+        <p class="site-footer__muted">
+          Частный мастер по ремонту ноутбуков и телефонов с выездом на дом.
+        </p>
+      </div>
+
+      <!-- TODO: замените все контакты на свои -->
+      <ul class="contacts">
+        <li>Телефон: <a href="tel:+79000000000">+7 900 000-00-00</a></li>
+        <li>Telegram: <a href="https://t.me/obrecchhen">@obrecchhen</a></li>
+        <li>WhatsApp: <a href="https://wa.me/79000000000">+7 900 000-00-00</a></li>
+        <li>Почта: <a href="mailto:deadinside23200821@gmail.com">deadinside23200821@gmail.com</a></li>
+        <li>Город: Москва, выезд в пределах МКАД и до 10 км за</li>
+        <li>Часы работы: ежедневно 9:00–21:00</li>
+      </ul>
+    </div>
+
+    <div class="container site-footer__bottom">
+      © <span id="year">2026</span> «Мастер на дом». Самозанятый, чек и договор
+      предоставляются.
+    </div>
+  </footer>
+
+  <!-- Скрипт с defer — выполнится после разбора HTML -->
+  <script src="script.js" defer></script>
+</body>
+</html>
