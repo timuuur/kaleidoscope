@@ -13,19 +13,22 @@
 
   const blends = [
     {
-      id: 'morning', name: 'Утро', region: 'altai', lon: 86, promise: 'Бодрость без кофеина',
+      id: 'morning', name: 'Утро', region: 'altai', lon: 86, promise: 'Бодрость без кофеина', when: '05:00–10:30',
+      mood: 'Мягко будит и помогает собраться с мыслями.', forWhom: 'Тем, кто хочет пить меньше кофе.',
       herbs: ['badan', 'rodiola', 'zveroboy', 'myata'],
       brew: { temp: 95, minutes: 7, dose: '1 ч. л. на 250 мл', note: 'Бадану нужна горячая вода и время, чтобы раскрыться.' },
       tin: { body: '#F4C4A1', lid: '#D9704A', text: '#3A2420', line: '#B4502A' },
     },
     {
-      id: 'day', name: 'День', region: 'caucasus', lon: 43, promise: 'Ясность и тонус',
+      id: 'day', name: 'День', region: 'caucasus', lon: 43, promise: 'Ясность и тонус', when: '10:30–16:30',
+      mood: 'Держит ровный тонус весь день, без скачков и спада.', forWhom: 'Тем, кто работает головой и проседает после обеда.',
       herbs: ['chabrec', 'dushica', 'shipovnik', 'melissa'],
       brew: { temp: 90, minutes: 5, dose: '1 ч. л. на 200 мл', note: 'Чабрец и душица горчат, если передержать.' },
       tin: { body: '#F3D27A', lid: '#C99A12', text: '#2A1F00', line: '#8A6A00' },
     },
     {
-      id: 'evening', name: 'Вечер', region: 'karelia', lon: 33, promise: 'Покой и сон',
+      id: 'evening', name: 'Вечер', region: 'karelia', lon: 33, promise: 'Покой и сон', when: 'после 16:30',
+      mood: 'Помогает выдохнуть и переключиться на отдых.', forWhom: 'Тем, кто долго не может отпустить рабочий день.',
       herbs: ['ivanchay', 'veresk', 'tavolga', 'brusnika'],
       brew: { temp: 85, minutes: 6, dose: '2 ч. л. на 300 мл', note: 'Иван-чай можно заварить второй раз.' },
       tin: { body: '#3B3F6B', lid: '#232644', text: '#F1E9DC', line: '#F09A4E' },
@@ -35,14 +38,17 @@
   const regions = {
     altai: {
       id: 'altai', name: 'Алтай', blend: 'morning', lon: 86, center: [86.5, 50.5], box: [76, 45, 98, 57], months: 'июнь–август', label: 'right',
+      concept: 'Утро приходит с востока: солнце встаёт над Алтаем — отсюда травы для утра.',
       story: 'Бадан берут перезимовавшим: тёмный лист и есть старинный «чигирский чай». Родиолу копают высоко в горах.',
     },
     caucasus: {
       id: 'caucasus', name: 'Кавказ', blend: 'day', lon: 43, center: [43.5, 43.3], box: [36, 40, 50, 48], months: 'июнь–июль', label: 'below',
+      concept: 'К полудню солнце стоит на юге, над Кавказом, — отсюда травы для дня.',
       story: 'Чабрец и душицу срезают в пору цветения на южных склонах Приэльбрусья, пока солнце стоит высоко.',
     },
     karelia: {
       id: 'karelia', name: 'Карелия', blend: 'evening', lon: 33, center: [33, 63], box: [26, 59, 41, 67], months: 'июль–сентябрь', label: 'right',
+      concept: 'Садится солнце на северо-западе, над Карелией, — отсюда травы для вечера.',
       story: 'Иван-чай ферментируют по старому копорскому способу. Вереск собирают в конце лета, когда сопки становятся лиловыми.',
     },
   };

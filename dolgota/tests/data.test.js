@@ -42,3 +42,10 @@ test('цены и названия', () => {
   assert.deepEqual(data.blendNames, { morning: 'Утро', day: 'День', evening: 'Вечер' });
   assert.equal(data.monthNames.length, 12);
 });
+
+test('у сборов есть время, настроение и «кому подойдёт», у регионов — строка концепции', () => {
+  for (const blend of data.blends) {
+    for (const key of ['when', 'mood', 'forWhom']) assert.ok(blend[key] && blend[key].length > 3, `${blend.id}.${key}`);
+  }
+  for (const region of Object.values(data.regions)) assert.ok(region.concept && region.concept.length > 10, `${region.id}.concept`);
+});

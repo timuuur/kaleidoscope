@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Долгота — чай, который идёт за солнцем</title>
+  <title>Долгота — травяные сборы на утро, день и вечер</title>
   <meta name="description" content="Учебный проект: три сбора диких трав с Алтая, Кавказа и Карелии — по одному на каждое время суток.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,15 +23,15 @@
 </head>
 <body>
   <div class="marquee" aria-hidden="true">
-    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
-    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+    <div class="marquee__track cap"><span>−10&nbsp;% на первый заказ · промокод FIRST10</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>−10&nbsp;% на первый заказ · промокод FIRST10</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+    <div class="marquee__track cap"><span>−10&nbsp;% на первый заказ · промокод FIRST10</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>−10&nbsp;% на первый заказ · промокод FIRST10</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
   </div>
 
   <header class="site-header">
     <a class="logo" href="index.html">долгота</a>
     <nav class="nav" id="nav" aria-label="Разделы">
       <a class="pill" href="#sbory">Сборы</a>
-      <a class="pill" href="#zavarivanie">Как заваривать</a>
+      <a class="pill" href="#dolgoty">Как это устроено</a>
       <a class="pill" href="herbarium.html">Гербарий</a>
     </nav>
     <div class="header-actions">
@@ -41,51 +41,55 @@
   </header>
 
   <main class="page">
-    <section class="hero">
+    <section class="hero" id="top">
       <div class="hero__text">
-        <h1 class="h1">Чай, который идёт за&nbsp;солнцем</h1>
-        <p class="lead">Три сбора диких трав с Алтая, Кавказа и Карелии — по одному на каждое время суток. Солнце на карте подсказывает, какой заварить сейчас.</p>
+        <p class="cap hero__eyebrow">Долгота · чай, который идёт за&nbsp;солнцем</p>
+        <h1 class="h1">Травяные сборы на утро, день и&nbsp;вечер</h1>
+        <p class="lead">Дикие травы Алтая, Кавказа и Карелии. Утренний сбор бодрит без кофеина, дневной держит ритм, вечерний помогает выдохнуть.</p>
         <div class="hero__actions">
           <a class="btn btn--accent" href="#sbory">Выбрать сбор</a>
           <a class="btn btn--ghost" href="#dolgoty">Как это устроено</a>
         </div>
+        <p class="promo mono">−10&nbsp;% на первый заказ · промокод&nbsp;<b>FIRST10</b></p>
       </div>
-      <div class="hero__now mono" aria-live="polite">
-        <span data-now-time></span>
-        <span class="muted" data-now-place></span>
-        <button class="pill pill--outline" type="button" data-reset hidden>Вернуться к моему времени</button>
+      <div class="hero__map">
+        <p class="hero__now mono" aria-live="polite">
+          <a href="#sbory" data-now-time></a>
+          <span data-now-place></span>
+        </p>
+        <svg class="atlas" data-hero-atlas role="group" aria-label="Карта России: солнце показывает, чей сейчас сбор"></svg>
+        <div class="hero__foot">
+          <p class="hero__hint mono" data-hint>потяни солнце, чтобы увидеть другое время суток</p>
+          <button class="pill pill--outline" type="button" data-reset hidden>Вернуться к моему времени</button>
+        </div>
       </div>
     </section>
 
-    <div class="hero__map">
-      <svg class="atlas" data-hero-atlas role="group" aria-label="Карта России: солнце показывает, чей сейчас сбор"></svg>
-      <p class="hero__hint mono muted">потяни солнце, чтобы увидеть другое время суток</p>
-    </div>
-
     <div class="ticker cap" aria-label="Свойства сборов">
-      <span>дикий сбор</span><span>ручная сушка</span><span>без ароматизаторов</span><span>12 трав</span><span>3 региона</span>
+      <span>дикий сбор</span><span>без кофеина</span><span>без ароматизаторов</span><span>12 трав</span><span>3 региона</span>
     </div>
 
     <section class="section" id="sbory">
       <div class="section-head">
         <h2 class="h2">Три сбора — три времени суток</h2>
-        <p class="lead">В каждом четыре травы одного региона. Ничего, кроме трав.</p>
+        <p class="lead">Выбирайте по тому, когда хотите пить чай. В каждом сборе четыре травы одного региона и больше ничего.</p>
       </div>
       <div class="blends" data-blends></div>
     </section>
 
     <section class="section" id="dolgoty">
       <div class="section-head">
-        <h2 class="h2">Три долготы</h2>
-        <p class="lead">Солнце встаёт над Алтаем, в полдень стоит над Кавказом и садится над Карелией. Каждую траву собирают там, где в её час светит солнце.</p>
+        <h2 class="h2">Почему утро, день и вечер</h2>
+        <p class="lead">За день солнце проходит над Россией с востока на запад. Мы собираем травы там, где в их час светит солнце, — поэтому у каждого сбора своё время.</p>
       </div>
-      <div class="longitudes" data-longitudes></div>
+      <div class="steps" data-steps></div>
+      <p class="steps__note mono muted">Число — долгота региона, отсюда и название «Долгота». <a href="#top">Потяни солнце на карте ↑</a></p>
     </section>
 
     <section class="section">
       <div class="section-head">
         <h2 class="h2">Гербарий</h2>
-        <p class="lead">12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
+        <p class="lead">Что внутри сборов: 12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
       </div>
       <div class="herb-preview" data-herb-preview></div>
       <a class="btn btn--ghost" href="herbarium.html">Открыть гербарий →</a>
@@ -96,7 +100,7 @@
         <div class="bundle__tins" data-bundle-tins></div>
         <div class="bundle__body">
           <h2 class="h2">Набор «Весь день»</h2>
-          <p class="lead">Три банки — утро, день и вечер. Хватает примерно на месяц, если заваривать каждый сбор в его время.</p>
+          <p class="lead">Все три сбора сразу — утро, день и вечер. Хватает примерно на месяц, если заваривать каждый сбор в его время.</p>
           <div class="segmented" role="group" aria-label="Как покупать">
             <button class="pill" type="button" data-plan="once" aria-pressed="false">Разово</button>
             <button class="pill" type="button" data-plan="sub" aria-pressed="true">Подписка −15&nbsp;%</button>
@@ -116,11 +120,13 @@
     <section class="section faq">
       <h2 class="h2">Вопросы</h2>
       <div class="faq__list">
+        <details><summary>Какой сбор выбрать?</summary><p>Выбирайте по времени, когда хотите пить чай: утром — «Утро», днём — «День», вечером — «Вечер». Если сомневаетесь, возьмите набор «Весь день» и попробуйте все три.</p></details>
+        <details><summary>Можно пить сбор не в своё время?</summary><p>Можно: это травы, а не расписание. Просто утренний сбор бодрит, а вечерний настраивает на отдых, поэтому мы советуем пить каждый в своё время.</p></details>
         <details><summary>Как устроена подписка?</summary><p>Раз в месяц приходит набор «Весь день» со скидкой 15&nbsp;%. Пропустить месяц или отменить подписку можно в любой момент.</p></details>
         <details><summary>Что входит в сбор?</summary><p>Только травы, по четыре в каждом сборе. Без ароматизаторов и чайного листа.</p></details>
         <details><summary>Есть ли противопоказания?</summary><p>Травы действуют мягко, но это не лекарство. Если вы беременны, кормите грудью или принимаете лекарства, посоветуйтесь с врачом.</p></details>
         <details><summary>Сколько идёт доставка?</summary><p>Нисколько: это учебный проект, и заказы не принимаются. В настоящем магазине здесь были бы сроки и цены доставки.</p></details>
-        <details open><summary>Это настоящий магазин?</summary><p>Нет. «Долгота» — учебный проект для портфолио: бренд вымышленный, заказы не принимаются.</p></details>
+        <details open><summary>Это настоящий магазин?</summary><p>Нет. «Долгота» — учебный проект для портфолио: бренд вымышленный, заказы не принимаются, промокод тоже демонстрационный.</p></details>
       </div>
     </section>
   </main>

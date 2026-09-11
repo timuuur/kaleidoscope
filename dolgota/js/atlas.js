@@ -126,8 +126,22 @@
     const meridianEl = svg.querySelector('.atlas-meridian');
     const meridianLabel = svg.querySelector('.atlas-meridian-label');
     const regionEls = [...svg.querySelectorAll('.atlas-region')];
+    const regionLabelEls = [...svg.querySelectorAll('.atlas-region-label')];
     const herbEls = [...svg.querySelectorAll('.atlas-herb')];
     const sunEl = svg.querySelector('.atlas-sun');
+
+    // Задевает ли подпись меридиана название региона (getBBox есть только у отрисованной карты).
+    function overlapsRegionLabel() {
+      try {
+        const a = meridianLabel.getBBox();
+        return regionLabelEls.some((el) => {
+          const b = el.getBBox();
+          return a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height;
+        });
+      } catch (e) {
+        return false;
+      }
+    }
 
     function setMeridian(lon) {
       if (!meridianEl) return;
@@ -137,10 +151,18 @@
         return;
       }
       meridianEl.setAttribute('d', lineD(meridianPoints(lon), toXY));
-      const [x, y] = at([lon, labelLat]);
-      meridianLabel.setAttribute('x', x);
-      meridianLabel.setAttribute('y', y);
       meridianLabel.textContent = `${lon}° в. д.`;
+      // Подпись ставим у нижнего конца меридиана и прижимаем внутрь рамки (13px моноширинный ≈ 7,8px на знак).
+      // Если на маленькой карте она задевает название региона, переносим её к верхнему концу.
+      const half = meridianLabel.textContent.length * 3.9 + 8;
+      const placeLabel = (lat) => {
+        const [x, y] = toXY([lon, lat]);
+        meridianLabel.setAttribute('x', Math.min(Math.max(x, half), width - half).toFixed(1));
+        meridianLabel.setAttribute('y', Math.min(Math.max(y, 22), height - 10).toFixed(1));
+      };
+      placeLabel(labelLat);
+      if (overlapsRegionLabel()) placeLabel(83);
+      meridianLabel.style.visibility = overlapsRegionLabel() ? 'hidden' : '';
     }
 
     if (mode === 'fragment') setMeridian(meridian);

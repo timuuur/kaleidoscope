@@ -1,4 +1,4 @@
-// Главная «Долготы»: часы → палитра и карта, карточки сборов, три долготы, набор, заваривание.
+// Главная «Долготы»: часы → палитра и карта, каталог сборов, концепция, превью гербария, набор, заваривание.
 (function () {
   const { clock, data, shop, atlas, tin, russia } = window.Dolgota;
   const $ = (selector, scope = document) => scope.querySelector(selector);
@@ -6,34 +6,31 @@
   const herbById = (id) => data.herbs.find((h) => h.id === id);
   const regionOf = (blend) => data.regions[blend.region];
 
-  // Карточки сборов.
+  // Каталог: три сбора — когда пить, какое настроение, кому подойдёт.
   $('[data-blends]').innerHTML = data.blends.map((blend) => {
     const region = regionOf(blend);
     const herbs = blend.herbs.map((id) => herbById(id).name.toLowerCase()).join(', ');
-    return `<article class="blend card" data-blend="${blend.id}">
+    return `<article class="blend card" id="sbor-${blend.id}" data-blend="${blend.id}">
       <span class="badge" data-now-badge hidden>сейчас его время</span>
       <div class="blend__tin">${tin.tinSvg({ name: blend.name, lon: blend.lon, regionName: region.name, tin: blend.tin }, 170)}</div>
-      <h3 class="blend__title">${blend.name} · ${region.name}</h3>
-      <p class="blend__promise muted">${blend.promise}: ${herbs}</p>
+      <div class="blend__head"><h3 class="blend__title">${blend.name} · ${region.name}</h3><span class="blend__when mono">${blend.when}</span></div>
+      <p class="blend__promise">${blend.promise}</p>
+      <p class="blend__mood">${blend.mood}</p>
+      <dl class="blend__facts"><div><dt>Кому</dt><dd>${blend.forWhom}</dd></div><div><dt>Травы</dt><dd>${herbs}</dd></div></dl>
       <p class="blend__price"><span>${shop.formatRub(data.prices.tin)} · ${data.prices.weight}</span><span class="mono muted">${shop.formatRub(shop.subscriptionPrice(data.prices.tin))} по подписке</span></p>
       <button class="btn btn--ink" type="button" data-add="${blend.id}">В корзину</button>
     </article>`;
   }).join('');
 
-  // Три долготы: фрагмент атласа вокруг каждого региона.
-  $('[data-longitudes]').innerHTML = data.blends.map((blend) => {
+  // Концепция: три шага по долготам — коротко, почему у каждого сбора своё время.
+  $('[data-steps]').innerHTML = data.blends.map((blend) => {
     const region = regionOf(blend);
-    return `<article class="longitude">
-      <span class="longitude__deg">${region.lon}°</span>
-      <span class="cap muted">${region.name} · в.&nbsp;д. · сбор ${region.months}</span>
-      <div class="longitude__map"><svg class="atlas" data-fragment="${region.id}" role="img" aria-label="Фрагмент карты: ${region.name}, ${region.lon}° восточной долготы"></svg></div>
-      <p>${region.story}</p>
+    return `<article class="step">
+      <span class="step__deg">${region.lon}°</span>
+      <span class="cap muted">${region.name} · ${blend.name.toLowerCase()}</span>
+      <p>${region.concept}</p>
     </article>`;
   }).join('');
-  $$('[data-fragment]').forEach((svg) => {
-    const region = data.regions[svg.dataset.fragment];
-    atlas.createAtlas(svg, { mode: 'fragment', width: 430, height: 260, pad: 0, rings: russia, regions: Object.values(data.regions), box: region.box, meridian: region.lon, clock });
-  });
 
   // Превью гербария.
   $('[data-herb-preview]').innerHTML = ['badan', 'chabrec', 'veresk', 'zveroboy'].map((id) => {
@@ -60,13 +57,17 @@
       <h3>${name}</h3><span class="temp">${brew.temp}&nbsp;°C · ${brew.minutes}&nbsp;мин</span>
       <span class="dose">${brew.dose}</span><p>${brew.note}</p></article>`).join('');
 
-  // Карта первого экрана и часы.
+  // Карта первого экрана: строится по реальной ширине колонки, чтобы подписи не мельчали.
   const small = window.matchMedia('(max-width: 640px)');
+  const heroSvg = $('[data-hero-atlas]');
   let heroAtlas = null;
+  let builtWidth = 0;
   function buildHero() {
-    const size = small.matches ? { width: 366, height: 250, pad: 12 } : { width: 1392, height: 620, pad: 34 };
-    heroAtlas = atlas.createAtlas($('[data-hero-atlas]'), {
-      mode: 'hero', ...size, rings: russia, regions: Object.values(data.regions), clock, blendNames: data.blendNames,
+    const width = Math.max(320, Math.round(heroSvg.parentElement.clientWidth || 800));
+    builtWidth = width;
+    heroAtlas = atlas.createAtlas(heroSvg, {
+      mode: 'hero', width, height: Math.round(width * (small.matches ? 0.68 : 0.58)), pad: Math.round(width * 0.03),
+      rings: russia, regions: Object.values(data.regions), clock, blendNames: data.blendNames,
       onDrag: (min) => clock.setOverride(min),
     });
   }
@@ -75,11 +76,14 @@
     const blend = clock.blendAt(min);
     const region = data.regions[data.blends.find((b) => b.id === blend).region];
     const sun = clock.sunAt(min);
-    $('[data-now-time]').textContent = sun.visible
-      ? `${clock.formatTime(min)} · время сбора „${data.blendNames[blend]}“`
-      : `${clock.formatTime(min)} · ночь · время сбора „${data.blendNames[blend]}“`;
+    const link = $('[data-now-time]');
+    link.textContent = sun.visible
+      ? `${clock.formatTime(min)} · время сбора „${data.blendNames[blend]}“ →`
+      : `${clock.formatTime(min)} · ночь · время сбора „${data.blendNames[blend]}“ →`;
+    link.href = `#sbor-${blend}`;
     $('[data-now-place]').textContent = sun.visible ? `${region.name}, ${region.lon}° в. д.` : '';
     $('[data-reset]').hidden = !overridden;
+    $('[data-hint]').hidden = overridden;
     $$('.blend').forEach((card) => {
       const now = card.dataset.blend === blend;
       card.classList.toggle('is-now', now);
@@ -89,7 +93,17 @@
   }
 
   $('[data-reset]').addEventListener('click', () => clock.setOverride(null));
-  small.addEventListener('change', () => { buildHero(); heroAtlas.update(clock.current()); });
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const width = Math.round(heroSvg.parentElement.clientWidth);
+      if (width && Math.abs(width - builtWidth) > 40) {
+        buildHero();
+        heroAtlas.update(clock.current());
+      }
+    }, 200);
+  });
 
   buildHero();
   clock.start(onTick);

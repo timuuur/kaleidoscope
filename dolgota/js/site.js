@@ -57,7 +57,7 @@
   // Лёгкое появление блоков при прокрутке. То, что видно сразу после загрузки, не трогаем — без мигания.
   function revealOnScroll() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
-    const selector = '.section-head, .ticker, .blend, .longitude, .herb-preview figure, .bundle, .brew article, .faq .h2, .faq details, .site-footer, .filters, .sheet, .sources';
+    const selector = '.section-head, .ticker, .blend, .step, .herb-preview figure, .bundle, .brew article, .faq .h2, .faq details, .site-footer, .filters, .sheet, .sources';
     const targets = [...document.querySelectorAll(selector)].filter((el) => el.getBoundingClientRect().top > window.innerHeight);
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
