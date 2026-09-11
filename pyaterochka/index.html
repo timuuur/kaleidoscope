@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Что покупать в Пятёрочке</title>
+  <meta name="description" content="Личная шпаргалка по полке Пятёрочки: полезные бюджетные продукты с чистым составом и запасом белка.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f3f6f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e1411" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A5%A6%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#shelf">К списку продуктов</a>
+
+  <header class="masthead wrap">
+    <h1 class="title">Что покупать в&nbsp;Пятёрочке</h1>
+    <p class="lead">Бюджетная полка с&nbsp;чистым составом и&nbsp;запасом белка. Отмечай, что положил в&nbsp;корзину,&nbsp;— внизу соберётся примерный чек.</p>
+    <p class="facts" id="facts"></p>
+  </header>
+
+  <main id="main">
+    <div class="controls wrap">
+      <div class="search">
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <label class="visually-hidden" for="q">Поиск по&nbsp;названию</label>
+        <input class="search-input" id="q" type="search" placeholder="Найти продукт" autocomplete="off" spellcheck="false" enterkeyhint="search">
+        <kbd class="search-kbd" aria-hidden="true">/</kbd>
+        <button class="search-clear" id="q-clear" type="button" hidden>
+          <span class="visually-hidden">Очистить поиск</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chips-bar" id="chips-bar">
+      <fieldset class="chips-set wrap">
+        <legend class="visually-hidden">Раздел</legend>
+        <div class="chips" id="chips"></div>
+      </fieldset>
+    </div>
+
+    <p class="visually-hidden" id="status" role="status" aria-live="polite"></p>
+
+    <div class="shelf wrap" id="shelf" tabindex="-1">
+      <noscript><p class="empty-text">Для списка продуктов нужен включённый JavaScript.</p></noscript>
+    </div>
+
+    <div class="empty wrap" id="empty" hidden>
+      <p class="empty-text" id="empty-text"></p>
+      <button class="btn btn-quiet" id="empty-action" type="button"></button>
+    </div>
+
+    <div class="guide wrap">
+      <section class="panel tips" aria-labelledby="tips-title">
+        <h2 class="panel-title" id="tips-title">Как читать состав за&nbsp;10&nbsp;секунд</h2>
+        <ol class="tips-list">
+          <li>Чем короче список ингредиентов&nbsp;— тем лучше.</li>
+          <li>Сахар и&nbsp;его синонимы (сироп, мальтодекстрин, глюкозно-фруктозный сироп) не&nbsp;должны быть в&nbsp;первых 3&nbsp;позициях состава.</li>
+          <li>«Растительный жир» в&nbsp;твороге, сыре и&nbsp;молоке&nbsp;— признак фальсификата.</li>
+          <li>Много «Е-номеров» подряд, особенно в&nbsp;колбасах и&nbsp;сырках,&nbsp;— сигнал пройти мимо.</li>
+          <li>«Мясосодержащий», «сырный продукт», «молокосодержащий» вместо «мясной/сырный/молочный»&nbsp;— дешёвая имитация.</li>
+        </ol>
+      </section>
+
+      <section class="panel caution" aria-labelledby="caution-title">
+        <h2 class="panel-title" id="caution-title"><span class="panel-emoji" aria-hidden="true">⚠️</span>Осторожно</h2>
+        <p class="panel-lead">Бюджетная линейка «Красная цена» по&nbsp;независимым проверкам</p>
+        <div class="verdicts">
+          <div class="verdict verdict-bad">
+            <h3 class="verdict-title">Подводили</h3>
+            <ul class="verdict-list">
+              <li>рыбные консервы (сайра)</li>
+              <li>творог 9%</li>
+              <li>круглозёрный рис</li>
+              <li>зефир</li>
+              <li>филе сельди</li>
+              <li>глазированные сырки</li>
+            </ul>
+          </div>
+          <div class="verdict verdict-good">
+            <h3 class="verdict-title">Получили хорошие оценки</h3>
+            <ul class="verdict-list">
+              <li>молоко</li>
+              <li>твёрдый сыр</li>
+              <li>йогурт</li>
+              <li>подсолнечное масло</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel day" aria-labelledby="day-title">
+        <h2 class="panel-title" id="day-title">Пример дня</h2>
+        <table class="day-table">
+          <thead>
+            <tr><th scope="col">Приём пищи</th><th scope="col">Что на&nbsp;тарелке</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Завтрак</th><td>Овсянка на&nbsp;молоке&nbsp;+ яйца</td></tr>
+            <tr><th scope="row">Перекус до/после тренировки</th><td>Творог или греческий йогурт&nbsp;+ финики</td></tr>
+            <tr><th scope="row">Обед</th><td>Гречка или рис&nbsp;+ куриное бедро/филе&nbsp;+ брокколи</td></tr>
+            <tr><th scope="row">Ужин</th><td>Минтай или тунец&nbsp;+ овощная смесь</td></tr>
+            <tr><th scope="row">Перекус</th><td>Грецкий орех или кефир</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <footer class="colophon wrap">
+    <p>Личная шпаргалка, а&nbsp;не&nbsp;реклама. Цены и&nbsp;фото&nbsp;— с&nbsp;<a href="https://catalog-ceny.ru/" target="_blank" rel="noopener noreferrer">catalog-ceny.ru</a>, на&nbsp;полке могут отличаться. Отметки хранятся только в&nbsp;этом браузере.</p>
+  </footer>
+
+  <div class="bar" id="bar">
+    <button class="bar-button" id="bar-button" type="button" aria-haspopup="dialog" aria-controls="receipt">
+      <span class="bar-progress" aria-hidden="true"><span class="bar-progress-fill" id="bar-fill"></span></span>
+      <svg class="bar-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h12v17l-2.4-1.6-2.4 1.6-2.4-1.6-2.4 1.6L6 20.5z"/><path d="M9.5 8.5h5M9.5 12h5"/></svg>
+      <span class="bar-text">
+        <span class="bar-label" id="bar-label">Чек пуст</span>
+        <span class="bar-hint" id="bar-hint">Отмечай, что взял</span>
+      </span>
+      <span class="bar-total" id="bar-total">0&nbsp;₽</span>
+    </button>
+  </div>
+
+  <dialog class="receipt" id="receipt" aria-labelledby="receipt-title">
+    <div class="receipt-sheet" id="receipt-sheet">
+      <div class="paper">
+        <header class="paper-head">
+          <h2 class="paper-title" id="receipt-title">Примерный чек</h2>
+          <p class="paper-date" id="receipt-date"></p>
+        </header>
+        <ul class="paper-lines" id="receipt-lines"></ul>
+        <p class="paper-empty" id="receipt-empty">Пока пусто. Отметь продукты, которые положил в&nbsp;корзину.</p>
+        <p class="paper-total"><span>ИТОГО</span><span id="receipt-total">0&nbsp;₽</span></p>
+        <p class="paper-count" id="receipt-count"></p>
+        <p class="paper-foot">Цены ориентировочные, на&nbsp;кассе сумма может отличаться</p>
+      </div>
+      <div class="receipt-actions">
+        <button class="btn btn-quiet" id="reset" type="button">Снять отметки</button>
+        <button class="btn btn-primary" id="receipt-close" type="button">Закрыть</button>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
