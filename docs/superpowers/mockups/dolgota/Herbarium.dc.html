@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Cormorant+Garamond:ital,wght@1,500&amp;display=swap">
+  <style>
+    body { margin: 0; background: #F8F8F5; color: #121212; font-family: Manrope, system-ui, sans-serif; }
+    a { color: #121212; } a:hover { color: #8A6A00; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; }
+    .lat { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; }
+    .pill { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; white-space: nowrap; }
+    .cap { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .sheet { background: #F4EFE4; color: #2A2520; border-radius: 20px; padding: 16px 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+    .tag { align-self: flex-start; padding: 5px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+  </style>
+</helmet>
+<div style="width: 1440px; min-height: 2700px; background: #F8F8F5">
+  <div class="mono cap" style="background: #121212; color: #F8F8F5; height: 36px; display: flex; align-items: center; justify-content: center; gap: 28px">
+    <span>доставка по всей России</span><span>·</span><span>подписка −15 %</span><span>·</span><span>урожай 2026 года</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 48px">
+    <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.06em">долгота</span>
+    <div style="display: flex; gap: 6px; background: #ECECE7; padding: 5px; border-radius: 999px"><span class="pill">Сборы</span><span class="pill">Как заваривать</span><span class="pill" style="background: #121212; color: #F8F8F5">Гербарий</span></div>
+    <span class="pill" style="background: #ECECE7">Корзина (0)</span>
+  </div>
+  <div style="padding: 36px 48px 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 48px">
+    <h1 style="margin: 0; font-size: 76px; font-weight: 700; letter-spacing: -0.035em; line-height: 1">Гербарий</h1>
+    <p style="margin: 0; font-size: 18px; line-height: 1.55; color: #666661; max-width: 520px">12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
+  </div>
+  <div style="margin: 32px 24px 0; border-radius: 28px; overflow: hidden; position: relative">
+    <!--MAP {"w":1392,"h":440,"pal":"day","mode":"mini","herbs":true,"hl":"chabrec","pad":26,"labelSize":15}-->
+    <span class="mono" style="position: absolute; left: 24px; bottom: 18px; font-size: 13px; color: #666661">точки сбора условные</span>
+  </div>
+  <div style="padding: 32px 48px 0; display: flex; gap: 8px; flex-wrap: wrap">
+    <span class="pill" style="background: #121212; color: #F8F8F5">Все</span>
+    <span class="pill" style="border: 1px solid #D8D8D2">Утро · Алтай</span>
+    <span class="pill" style="border: 1px solid #D8D8D2">День · Кавказ</span>
+    <span class="pill" style="border: 1px solid #D8D8D2">Вечер · Карелия</span>
+  </div>
+  <div style="padding: 24px 48px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":1,"flower":"#E8B7C8"}--></div><span style="font-size: 20px; font-weight: 700">Бадан</span><span class="lat" style="font-size: 20px; color: #6B6457">Bergenia crassifolia</span><span class="mono" style="font-size: 12px; color: #6B6457">Алтай · 51,6° с. ш. 87,7° в. д.<br>апрель–май</span><span class="tag" style="background: #F4C4A1; color: #3A2420">Утро</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":2,"flower":"#F0C94A"}--></div><span style="font-size: 20px; font-weight: 700">Родиола</span><span class="lat" style="font-size: 20px; color: #6B6457">Rhodiola rosea</span><span class="mono" style="font-size: 12px; color: #6B6457">Алтай · 49,8° с. ш. 86,6° в. д.<br>август</span><span class="tag" style="background: #F4C4A1; color: #3A2420">Утро</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":3,"flower":"#F0C94A"}--></div><span style="font-size: 20px; font-weight: 700">Зверобой</span><span class="lat" style="font-size: 20px; color: #6B6457">Hypericum perforatum</span><span class="mono" style="font-size: 12px; color: #6B6457">Алтай · 51,4° с. ш. 86,0° в. д.<br>июль</span><span class="tag" style="background: #F4C4A1; color: #3A2420">Утро</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":4,"flower":"#C8B4E0"}--></div><span style="font-size: 20px; font-weight: 700">Мята</span><span class="lat" style="font-size: 20px; color: #6B6457">Mentha arvensis</span><span class="mono" style="font-size: 12px; color: #6B6457">Алтай · 50,3° с. ш. 85,6° в. д.<br>июль–август</span><span class="tag" style="background: #F4C4A1; color: #3A2420">Утро</span></div>
+    <div class="sheet" style="outline: 2px solid #EDB723; outline-offset: -2px"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":5,"flower":"#C9A0C8"}--></div><span style="font-size: 20px; font-weight: 700">Чабрец</span><span class="lat" style="font-size: 20px; color: #6B6457">Thymus serpyllum</span><span class="mono" style="font-size: 12px; color: #6B6457">Кавказ · 43,3° с. ш. 42,5° в. д.<br>июнь–июль</span><span class="tag" style="background: #F3D27A; color: #2A1F00">День</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":6,"flower":"#D9A3C0"}--></div><span style="font-size: 20px; font-weight: 700">Душица</span><span class="lat" style="font-size: 20px; color: #6B6457">Origanum vulgare</span><span class="mono" style="font-size: 12px; color: #6B6457">Кавказ · 43,6° с. ш. 41,3° в. д.<br>июль</span><span class="tag" style="background: #F3D27A; color: #2A1F00">День</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":7,"flower":"#E58A7A"}--></div><span style="font-size: 20px; font-weight: 700">Шиповник</span><span class="lat" style="font-size: 20px; color: #6B6457">Rosa cinnamomea</span><span class="mono" style="font-size: 12px; color: #6B6457">Кавказ · 43,9° с. ш. 42,7° в. д.<br>сентябрь</span><span class="tag" style="background: #F3D27A; color: #2A1F00">День</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":8,"flower":"#EDE3B8"}--></div><span style="font-size: 20px; font-weight: 700">Мелисса</span><span class="lat" style="font-size: 20px; color: #6B6457">Melissa officinalis</span><span class="mono" style="font-size: 12px; color: #6B6457">Кавказ · 43,3° с. ш. 41,6° в. д.<br>июнь–июль</span><span class="tag" style="background: #F3D27A; color: #2A1F00">День</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":9,"flower":"#D96FA8"}--></div><span style="font-size: 20px; font-weight: 700">Иван-чай</span><span class="lat" style="font-size: 20px; color: #6B6457">Chamaenerion angustifolium</span><span class="mono" style="font-size: 12px; color: #6B6457">Карелия · 62,2° с. ш. 34,3° в. д.<br>июль</span><span class="tag" style="background: #3B3F6B; color: #F1E9DC">Вечер</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":10,"flower":"#B48CC4"}--></div><span style="font-size: 20px; font-weight: 700">Вереск</span><span class="lat" style="font-size: 20px; color: #6B6457">Calluna vulgaris</span><span class="mono" style="font-size: 12px; color: #6B6457">Карелия · 63,7° с. ш. 34,3° в. д.<br>август–сентябрь</span><span class="tag" style="background: #3B3F6B; color: #F1E9DC">Вечер</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":11,"flower":"#F2EAD0"}--></div><span style="font-size: 20px; font-weight: 700">Таволга</span><span class="lat" style="font-size: 20px; color: #6B6457">Filipendula ulmaria</span><span class="mono" style="font-size: 12px; color: #6B6457">Карелия · 61,0° с. ш. 33,0° в. д.<br>июль</span><span class="tag" style="background: #3B3F6B; color: #F1E9DC">Вечер</span></div>
+    <div class="sheet"><div style="border-radius: 12px; overflow: hidden"><!--PLATE {"seed":12,"flower":"#D8434A"}--></div><span style="font-size: 20px; font-weight: 700">Брусника</span><span class="lat" style="font-size: 20px; color: #6B6457">Vaccinium vitis-idaea</span><span class="mono" style="font-size: 12px; color: #6B6457">Карелия · 64,9° с. ш. 34,6° в. д.<br>май</span><span class="tag" style="background: #3B3F6B; color: #F1E9DC">Вечер</span></div>
+  </div>
+  <div style="margin: 64px 48px 48px; border-top: 1px solid #D8D8D2; padding-top: 24px; display: flex; flex-direction: column; gap: 8px">
+    <span class="mono cap" style="color: #666661">Источники</span>
+    <span style="font-size: 15px; line-height: 1.6; color: #666661">C. A. M. Lindman, «Bilder ur Nordens Flora», 1901–1905 · F. E. Köhler, «Köhler's Medizinal-Pflanzen», 1887 · «Edwards's Botanical Register», 1829–1847 — общественное достояние, Викисклад. Карта — Natural Earth.</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

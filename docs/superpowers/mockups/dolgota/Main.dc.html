@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Cormorant+Garamond:ital,wght@1,500&amp;display=swap">
+  <style>
+    body { margin: 0; background: #F8F8F5; color: #121212; font-family: Manrope, system-ui, sans-serif; }
+    a { color: #121212; } a:hover { color: #8A6A00; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; }
+    .lat { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; }
+    .pill { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; white-space: nowrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 26px; border-radius: 999px; font-size: 16px; font-weight: 700; white-space: nowrap; }
+    .h2 { margin: 0; font-size: 44px; font-weight: 700; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
+    .cap { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .lead { margin: 0; font-size: 18px; line-height: 1.55; color: #666661; text-wrap: pretty; }
+  </style>
+</helmet>
+<div style="width: 1440px; min-height: 5650px; background: #F8F8F5">
+
+  <div class="mono cap" style="background: #121212; color: #F8F8F5; height: 36px; display: flex; align-items: center; justify-content: center; gap: 28px">
+    <span>доставка по всей России</span><span>·</span><span>подписка −15 %</span><span>·</span><span>урожай 2026 года</span>
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 48px">
+    <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.06em">долгота</span>
+    <div style="display: flex; gap: 6px; background: #ECECE7; padding: 5px; border-radius: 999px">
+      <span class="pill">Сборы</span><span class="pill">Как заваривать</span><span class="pill">Гербарий</span>
+    </div>
+    <span class="pill" style="background: #ECECE7">Корзина (0)</span>
+  </div>
+
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; padding: 28px 48px 0">
+    <div style="display: flex; flex-direction: column; gap: 22px; max-width: 780px">
+      <h1 style="margin: 0; font-size: 76px; font-weight: 700; letter-spacing: -0.035em; line-height: 1">Чай, который идёт за солнцем</h1>
+      <p class="lead" style="max-width: 580px">Три сбора диких трав с Алтая, Кавказа и Карелии — по одному на каждое время суток. Солнце на карте подсказывает, какой заварить сейчас.</p>
+      <div style="display: flex; gap: 12px">
+        <span class="btn" style="background: #EDB723; color: #2A1F00">Выбрать сбор</span>
+        <span class="btn" style="border: 1.5px solid #121212">Как это устроено</span>
+      </div>
+    </div>
+    <div class="mono" style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 14px; color: #666661">
+      <span style="color: #121212">14:20 · время сбора „День“</span>
+      <span>Кавказ, 43° в. д.</span>
+    </div>
+  </div>
+
+  <div style="margin: 28px 24px 0; border-radius: 28px; overflow: hidden; position: relative">
+    <!--MAP {"w":1392,"h":620,"pal":"day","mode":"hero","time":14.33,"pad":34,"labelSize":16}-->
+    <span class="mono" style="position: absolute; left: 24px; bottom: 20px; font-size: 13px; color: #666661">потяни солнце, чтобы увидеть другое время суток</span>
+    <span class="pill" style="position: absolute; right: 20px; bottom: 16px; background: #121212; color: #F8F8F5">Подписка −15 %</span>
+  </div>
+
+  <div class="mono cap" style="margin-top: 48px; border-top: 1px solid #D8D8D2; border-bottom: 1px solid #D8D8D2; height: 52px; display: flex; align-items: center; justify-content: center; gap: 28px; color: #121212">
+    <span>дикий сбор</span><span>·</span><span>ручная сушка</span><span>·</span><span>без ароматизаторов</span><span>·</span><span>12 трав</span><span>·</span><span>3 региона</span>
+  </div>
+
+  <div style="padding: 96px 48px 0; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px">
+      <h2 class="h2">Три сбора — три времени суток</h2>
+      <p class="lead" style="max-width: 420px">В каждом четыре травы одного региона. Ничего, кроме трав.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <div style="background: #ECECE7; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: center; padding: 12px 0 8px"><!--TIN {"k":"morning","width":170}--></div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">Утро · Алтай</span>
+        <span style="font-size: 16px; color: #666661">Бодрость без кофеина: бадан, родиола, зверобой, мята</span>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 12px"><span style="font-size: 18px; font-weight: 700">690 ₽ · 50 г</span><span class="mono" style="font-size: 13px; color: #666661">587 ₽ по подписке</span></div>
+        <span class="btn" style="background: #121212; color: #F8F8F5">В корзину</span>
+      </div>
+      <div style="background: #ECECE7; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px; outline: 2px solid #EDB723; outline-offset: -2px; position: relative">
+        <span class="mono cap" style="position: absolute; top: 20px; left: 20px; background: #EDB723; color: #2A1F00; padding: 6px 10px; border-radius: 999px">сейчас его время</span>
+        <div style="display: flex; justify-content: center; padding: 12px 0 8px"><!--TIN {"k":"day","width":170}--></div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">День · Кавказ</span>
+        <span style="font-size: 16px; color: #666661">Ясность и тонус: чабрец, душица, шиповник, мелисса</span>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 12px"><span style="font-size: 18px; font-weight: 700">690 ₽ · 50 г</span><span class="mono" style="font-size: 13px; color: #666661">587 ₽ по подписке</span></div>
+        <span class="btn" style="background: #EDB723; color: #2A1F00">В корзину</span>
+      </div>
+      <div style="background: #ECECE7; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: center; padding: 12px 0 8px"><!--TIN {"k":"evening","width":170}--></div>
+        <span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">Вечер · Карелия</span>
+        <span style="font-size: 16px; color: #666661">Покой и сон: иван-чай, вереск, таволга, брусничный лист</span>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 12px"><span style="font-size: 18px; font-weight: 700">690 ₽ · 50 г</span><span class="mono" style="font-size: 13px; color: #666661">587 ₽ по подписке</span></div>
+        <span class="btn" style="background: #121212; color: #F8F8F5">В корзину</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 120px 48px 0; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px">
+      <h2 class="h2">Три долготы</h2>
+      <p class="lead" style="max-width: 560px">Солнце встаёт над Алтаем, в полдень стоит над Кавказом и садится над Карелией. Каждую траву собирают там, где в её час светит солнце.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 104px; font-weight: 700; letter-spacing: -0.05em; line-height: 0.9">86°</span>
+        <span class="mono cap" style="color: #666661">Алтай · в. д. · сбор июнь–август</span>
+        <div style="border-radius: 20px; overflow: hidden"><!--MAP {"w":430,"h":260,"pal":"day","mode":"fragment","box":[76,45,98,57],"meridian":86,"pad":0,"labelSize":14}--></div>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #666661">Бадан берут перезимовавшим: тёмный лист и есть старинный «чигирский чай». Родиолу копают высоко в горах.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 104px; font-weight: 700; letter-spacing: -0.05em; line-height: 0.9">43°</span>
+        <span class="mono cap" style="color: #666661">Кавказ · в. д. · сбор июнь–июль</span>
+        <div style="border-radius: 20px; overflow: hidden"><!--MAP {"w":430,"h":260,"pal":"day","mode":"fragment","box":[36,40,50,48],"meridian":43,"pad":0,"labelSize":14}--></div>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #666661">Чабрец и душицу срезают в пору цветения на южных склонах Приэльбрусья, пока солнце стоит высоко.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 104px; font-weight: 700; letter-spacing: -0.05em; line-height: 0.9">33°</span>
+        <span class="mono cap" style="color: #666661">Карелия · в. д. · сбор июль–сентябрь</span>
+        <div style="border-radius: 20px; overflow: hidden"><!--MAP {"w":430,"h":260,"pal":"day","mode":"fragment","box":[26,59,41,67],"meridian":33,"pad":0,"labelSize":14}--></div>
+        <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #666661">Иван-чай ферментируют по старому копорскому способу. Вереск собирают в конце лета, когда сопки становятся лиловыми.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 120px 48px 0; display: flex; flex-direction: column; gap: 40px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px">
+      <h2 class="h2">Гербарий</h2>
+      <p class="lead" style="max-width: 520px">12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 10px"><div style="border-radius: 16px; overflow: hidden"><!--PLATE {"seed":1,"flower":"#E8B7C8"}--></div><span style="font-size: 18px; font-weight: 700">Бадан</span><span class="lat" style="font-size: 20px; color: #666661">Bergenia crassifolia</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px"><div style="border-radius: 16px; overflow: hidden"><!--PLATE {"seed":5,"flower":"#C9A0C8"}--></div><span style="font-size: 18px; font-weight: 700">Чабрец</span><span class="lat" style="font-size: 20px; color: #666661">Thymus serpyllum</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px"><div style="border-radius: 16px; overflow: hidden"><!--PLATE {"seed":10,"flower":"#B48CC4"}--></div><span style="font-size: 18px; font-weight: 700">Вереск</span><span class="lat" style="font-size: 20px; color: #666661">Calluna vulgaris</span></div>
+      <div style="display: flex; flex-direction: column; gap: 10px"><div style="border-radius: 16px; overflow: hidden"><!--PLATE {"seed":3,"flower":"#F0C94A"}--></div><span style="font-size: 18px; font-weight: 700">Зверобой</span><span class="lat" style="font-size: 20px; color: #666661">Hypericum perforatum</span></div>
+    </div>
+    <div><span class="btn" style="border: 1.5px solid #121212">Открыть гербарий →</span></div>
+  </div>
+
+  <div style="margin: 120px 48px 0; background: #ECECE7; border-radius: 28px; padding: 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: center">
+    <div style="display: flex; justify-content: center; align-items: flex-end">
+      <div style="margin-right: -34px"><!--TIN {"k":"morning","width":170}--></div>
+      <div style="position: relative; z-index: 1"><!--TIN {"k":"day","width":200}--></div>
+      <div style="margin-left: -34px"><!--TIN {"k":"evening","width":170}--></div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px">
+      <h2 class="h2">Набор «Весь день»</h2>
+      <p class="lead">Три банки — утро, день и вечер. Хватает примерно на месяц, если заваривать каждый сбор в его время.</p>
+      <div style="display: flex; gap: 4px; background: #F8F8F5; padding: 4px; border-radius: 999px; width: max-content">
+        <span class="pill" style="color: #666661">Разово</span>
+        <span class="pill" style="background: #121212; color: #F8F8F5">Подписка −15 %</span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 14px"><span style="font-size: 44px; font-weight: 700; letter-spacing: -0.03em">1 522 ₽</span><span style="font-size: 20px; color: #666661; text-decoration: line-through">1 790 ₽</span></div>
+      <span class="mono" style="font-size: 13px; color: #666661">раз в месяц · пропустить или отменить можно в любой момент</span>
+      <div><span class="btn" style="background: #EDB723; color: #2A1F00">В корзину</span></div>
+    </div>
+  </div>
+
+  <div style="padding: 120px 48px 0; display: flex; flex-direction: column; gap: 40px">
+    <h2 class="h2">Как заваривать</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <div style="border: 1px solid #D8D8D2; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span style="font-size: 24px; font-weight: 700">Утро</span><span class="mono" style="font-size: 20px">95 °C · 7 мин</span><span class="mono" style="font-size: 14px; color: #666661">1 ч. л. на 250 мл</span><span style="font-size: 16px; line-height: 1.5; color: #666661">Бадану нужна горячая вода и время, чтобы раскрыться.</span></div>
+      <div style="border: 1px solid #D8D8D2; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span style="font-size: 24px; font-weight: 700">День</span><span class="mono" style="font-size: 20px">90 °C · 5 мин</span><span class="mono" style="font-size: 14px; color: #666661">1 ч. л. на 200 мл</span><span style="font-size: 16px; line-height: 1.5; color: #666661">Чабрец и душица горчат, если передержать.</span></div>
+      <div style="border: 1px solid #D8D8D2; border-radius: 20px; padding: 28px; display: flex; flex-direction: column; gap: 14px"><span style="font-size: 24px; font-weight: 700">Вечер</span><span class="mono" style="font-size: 20px">85 °C · 6 мин</span><span class="mono" style="font-size: 14px; color: #666661">2 ч. л. на 300 мл</span><span style="font-size: 16px; line-height: 1.5; color: #666661">Иван-чай можно заварить второй раз.</span></div>
+    </div>
+  </div>
+
+  <div style="padding: 120px 48px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+    <h2 class="h2">Вопросы</h2>
+    <div style="grid-column: span 2; display: flex; flex-direction: column">
+      <div style="display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid #D8D8D2; font-size: 20px; font-weight: 500"><span>Как устроена подписка?</span><span>+</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid #D8D8D2; font-size: 20px; font-weight: 500"><span>Что входит в сбор?</span><span>+</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid #D8D8D2; font-size: 20px; font-weight: 500"><span>Есть ли противопоказания?</span><span>+</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 22px 0; border-top: 1px solid #D8D8D2; font-size: 20px; font-weight: 500"><span>Сколько идёт доставка?</span><span>+</span></div>
+      <div style="padding: 22px 0; border-top: 1px solid #D8D8D2; border-bottom: 1px solid #D8D8D2; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 500"><span>Это настоящий магазин?</span><span>−</span></div>
+        <p class="lead" style="max-width: 640px">Нет. «Долгота» — учебный проект для портфолио: бренд вымышленный, заказы не принимаются.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 120px 24px 24px; background: #121212; color: #F8F8F5; border-radius: 28px; padding: 56px; display: flex; flex-direction: column; gap: 48px">
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px">
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <span style="font-size: 32px; font-weight: 700; letter-spacing: -0.03em">Письмо раз в сезон</span>
+        <span style="font-size: 16px; color: #B8B8B0">О новом урожае и о том, как меняется свет.</span>
+        <div style="display: flex; gap: 10px"><span style="flex-grow: 1; height: 52px; border-radius: 999px; border: 1px solid #55554F; display: flex; align-items: center; padding: 0 22px; color: #8A8A84">почта@пример.рф</span><span class="btn" style="background: #F8F8F5; color: #121212">Подписаться</span></div>
+        <span class="mono" style="font-size: 12px; color: #8A8A84">демо: форма проверяет адрес, но ничего не отправляет</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; font-size: 16px">
+        <div style="display: flex; flex-direction: column; gap: 10px"><span class="mono cap" style="color: #8A8A84">Магазин</span><span>Сборы</span><span>Набор «Весь день»</span><span>Как заваривать</span></div>
+        <div style="display: flex; flex-direction: column; gap: 10px"><span class="mono cap" style="color: #8A8A84">Гербарий</span><span>Все травы</span><span>Источники</span></div>
+      </div>
+    </div>
+    <div class="mono" style="border-top: 1px solid #3A3A36; padding-top: 24px; display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: #8A8A84">
+      <span>Учебный проект: магазин вымышленный, заказы не принимаются · Не является лекарственным средством</span>
+      <span>Гравюры: Lindman, Köhler, Edwards's Botanical Register — общественное достояние · Карта: Natural Earth · Шрифты: Google Fonts</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

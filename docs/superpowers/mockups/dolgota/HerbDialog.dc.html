@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;family=Cormorant+Garamond:ital,wght@1,500&amp;display=swap">
+  <style>
+    body { margin: 0; background: #F8F8F5; color: #121212; font-family: Manrope, system-ui, sans-serif; }
+    a { color: #121212; } a:hover { color: #8A6A00; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; }
+    .lat { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; }
+    .cap { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .m { height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; background: #E4DFD3; color: #6B6457; }
+    .m.on { background: #EDB723; color: #2A1F00; font-weight: 500; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #8E8E8A; display: flex; align-items: center; justify-content: center">
+  <div style="width: 1080px; background: #F4EFE4; color: #2A2520; border-radius: 28px; padding: 40px; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 44px; position: relative">
+    <div style="border-radius: 18px; overflow: hidden"><!--PLATE {"seed":5,"w":400,"h":540,"flower":"#C9A0C8"}--></div>
+    <div style="display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px">
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 48px; font-weight: 700; letter-spacing: -0.035em; line-height: 1">Чабрец</span>
+          <span class="lat" style="font-size: 26px; color: #6B6457">Thymus serpyllum</span>
+        </div>
+        <span style="width: 44px; height: 44px; border-radius: 999px; background: #E4DFD3; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg width="18" height="18" viewBox="0 0 18 18"><path d="M3 3 L15 15 M15 3 L3 15" stroke="#2A2520" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <span class="mono" style="font-size: 14px; color: #6B6457">Кавказ · 43,3° с. ш. 42,5° в. д.</span>
+      <p style="margin: 0; font-size: 17px; line-height: 1.6; text-wrap: pretty">Низкий кустарничек с тёплым смолистым запахом. На южных склонах Приэльбрусья его срезают в пору цветения. В сборе «День» даёт пряную основу и лёгкую горчинку.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span class="mono cap" style="color: #6B6457">месяцы сбора</span>
+        <div class="mono" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px">
+          <span class="m">я</span><span class="m">ф</span><span class="m">м</span><span class="m">а</span><span class="m">м</span><span class="m on">и</span><span class="m on">и</span><span class="m">а</span><span class="m">с</span><span class="m">о</span><span class="m">н</span><span class="m">д</span>
+        </div>
+      </div>
+      <div style="border-radius: 16px; overflow: hidden"><!--MAP {"w":556,"h":170,"pal":"day","mode":"fragment","box":[34,39.5,52,48.5],"herbs":true,"hl":"chabrec","pad":0,"labelSize":13}--></div>
+      <span style="font-size: 17px; font-weight: 700">Входит в сбор „День“ →</span>
+      <span class="mono" style="font-size: 12px; color: #6B6457">Гравюра: C. A. M. Lindman, Bilder ur Nordens Flora, 1901–1905, № 90 · общественное достояние</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+  <style>
+    body { margin: 0; background: #F7E9DF; color: #3A2420; font-family: Manrope, system-ui, sans-serif; }
+    a { color: #3A2420; } a:hover { color: #B4502A; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; }
+    .pill { display: inline-flex; align-items: center; height: 38px; padding: 0 16px; border-radius: 999px; font-size: 14px; font-weight: 500; white-space: nowrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; height: 52px; padding: 0 26px; border-radius: 999px; font-size: 16px; font-weight: 700; white-space: nowrap; }
+    .cap { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+  </style>
+</helmet>
+<div style="width: 1440px; height: 900px; background: #F7E9DF">
+  <div class="mono cap" style="background: #3A2420; color: #F7E9DF; height: 36px; display: flex; align-items: center; justify-content: center; gap: 28px">
+    <span>доставка по всей России</span><span>·</span><span>подписка −15 %</span><span>·</span><span>урожай 2026 года</span>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 48px">
+    <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.06em">долгота</span>
+    <div style="display: flex; gap: 6px; background: #F0DCCF; padding: 5px; border-radius: 999px"><span class="pill">Сборы</span><span class="pill">Как заваривать</span><span class="pill">Гербарий</span></div>
+    <span class="pill" style="background: #F0DCCF">Корзина (0)</span>
+  </div>
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; padding: 20px 48px 0">
+    <div style="display: flex; flex-direction: column; gap: 18px; max-width: 780px">
+      <h1 style="margin: 0; font-size: 68px; font-weight: 700; letter-spacing: -0.035em; line-height: 1">Чай, который идёт за солнцем</h1>
+      <div style="display: flex; gap: 12px"><span class="btn" style="background: #D9704A; color: #35170C">Выбрать сбор</span><span class="btn" style="border: 1.5px solid #3A2420">Как это устроено</span></div>
+    </div>
+    <div class="mono" style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 14px; color: #7A5A50">
+      <span style="color: #3A2420">07:40 · время сбора „Утро“</span><span>Алтай, 86° в. д.</span>
+    </div>
+  </div>
+  <div style="margin: 24px 24px 0; border-radius: 28px; overflow: hidden">
+    <!--MAP {"w":1392,"h":500,"pal":"morning","mode":"hero","time":7.67,"pad":28,"labelSize":16}-->
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
