@@ -60,7 +60,7 @@
       taste: 'с лёгким ароматом розы',
       about: 'Растёт высоко в горах, у ручьёв и на каменистых склонах. Корень на срезе пахнет розой, отсюда латинское rosea.',
       image: 'img/herbs/rodiola.jpg',
-      source: { title: '«Atlas der Alpenflora», 1882', url: 'https://commons.wikimedia.org/wiki/Category:Rhodiola_rosea_-_botanical_illustrations', license: PD },
+      source: { title: '«Atlas der Alpenflora», 1882', url: 'https://commons.wikimedia.org/wiki/File:Atlas_der_Alpenflora_(1882)_(20317664056).jpg', license: PD },
     },
     {
       id: 'zveroboy', name: 'Зверобой', latin: 'Hypericum perforatum', blend: 'morning', coords: [86.0, 51.4], months: [7],

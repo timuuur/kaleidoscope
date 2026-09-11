@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Гербарий — Долгота</title>
+  <meta name="description" content="Учебный проект: 12 трав из трёх регионов с гравюрами из ботанических атласов XIX и начала XX века.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/herbarium.css">
+  <script defer src="js/clock.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="data/russia.js"></script>
+  <script defer src="js/atlas.js"></script>
+  <script defer src="js/fit.js"></script>
+  <script defer src="js/site.js"></script>
+  <script defer src="js/herbarium.js"></script>
+</head>
+<body>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+  </div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">долгота</a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a class="pill" href="index.html#sbory">Сборы</a>
+      <a class="pill" href="index.html#zavarivanie">Как заваривать</a>
+      <a class="pill is-current" href="herbarium.html" aria-current="page">Гербарий</a>
+    </nav>
+    <div class="header-actions">
+      <button class="pill nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-nav-toggle>Меню</button>
+      <button class="pill cart-pill" type="button" data-cart>Корзина (<span data-cart-count>0</span>)</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <h1 class="h1">Гербарий</h1>
+      <p class="lead">12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
+    </section>
+
+    <div class="mini-map">
+      <svg class="atlas" data-mini-atlas role="group" aria-label="Карта мест сбора трав"></svg>
+      <p class="mini-map__note mono muted">точки сбора условные</p>
+    </div>
+
+    <div class="filters" role="group" aria-label="Фильтр по сбору">
+      <button class="pill pill--outline" type="button" data-filter="all" aria-pressed="true">Все</button>
+      <button class="pill pill--outline" type="button" data-filter="morning" aria-pressed="false">Утро · Алтай</button>
+      <button class="pill pill--outline" type="button" data-filter="day" aria-pressed="false">День · Кавказ</button>
+      <button class="pill pill--outline" type="button" data-filter="evening" aria-pressed="false">Вечер · Карелия</button>
+    </div>
+
+    <div class="herb-grid" data-herb-grid></div>
+
+    <section class="sources" id="istochniki">
+      <h2 class="cap muted">Источники</h2>
+      <ul data-sources></ul>
+      <p class="muted">Карта — Natural Earth, общественное достояние.</p>
+    </section>
+  </main>
+
+  <dialog class="herb-dialog" data-herb-dialog aria-labelledby="herb-title">
+    <button class="herb-dialog__close" type="button" data-herb-close aria-label="Закрыть">×</button>
+    <div data-herb-body></div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <form class="newsletter" data-newsletter novalidate>
+        <h2 class="h2">Письмо раз в сезон</h2>
+        <p>О новом урожае и о том, как меняется свет.</p>
+        <div class="newsletter__row">
+          <label class="visually-hidden" for="email">Почта</label>
+          <input id="email" name="email" type="email" required placeholder="почта@пример.рф" autocomplete="email">
+          <button class="btn" type="submit">Подписаться</button>
+        </div>
+        <p class="newsletter__note" data-newsletter-message aria-live="polite">Демо: форма проверяет адрес, но ничего не отправляет.</p>
+      </form>
+      <div class="footer-links">
+        <div><span class="cap">Магазин</span><a href="index.html#sbory">Сборы</a><a href="index.html#nabor">Набор «Весь день»</a><a href="index.html#zavarivanie">Как заваривать</a></div>
+        <div><span class="cap">Гербарий</span><a href="herbarium.html">Все травы</a><a href="#istochniki">Источники</a></div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>Учебный проект: магазин вымышленный, заказы не принимаются · Не является лекарственным средством</span>
+      <span>Гравюры: Lindman, Köhler, Thomé, «The Botanical Magazine», «Atlas der Alpenflora» — общественное достояние · Карта: Natural Earth · Шрифты: Google Fonts</span>
+    </div>
+  </footer>
+
+  <a class="pill sticky-pill" href="index.html#nabor">Подписка −15&nbsp;%</a>
+  <div class="toast" role="status" data-toast hidden></div>
+</body>
+</html>
