@@ -1,7 +1,7 @@
 # «Долгота» — учебный сайт в стиле noon.world
 
 - **Дата:** 10.09.2026
-- **Статус:** дизайн утверждён по разделам в чате, спецификация ждёт ревью
+- **Статус:** утверждена, реализована в ветке `feat/dolgota`
 - **Ветка:** `feat/dolgota`
 - **Папка проекта:** `dolgota/`
 
@@ -47,20 +47,20 @@
 
 | № | Трава | Латынь | Сбор | Гравюра |
 |---|---|---|---|---|
-| 1 | Бадан толстолистный | *Bergenia crassifolia* | Утро | Edwards's Botanical Register, найдена |
-| 2 | Родиола розовая | *Rhodiola rosea* | Утро | ищем, см. раздел 7 |
+| 1 | Бадан толстолистный | *Bergenia crassifolia* | Утро | The Botanical Magazine, т. 6, табл. 196 (1793) |
+| 2 | Родиола розовая | *Rhodiola rosea* | Утро | Atlas der Alpenflora (1882) |
 | 3 | Зверобой продырявленный | *Hypericum perforatum* | Утро | Lindman, № 230 |
 | 4 | Мята полевая | *Mentha arvensis* | Утро | Lindman, № 88 |
 | 5 | Чабрец | *Thymus serpyllum* | День | Lindman, № 90 |
 | 6 | Душица | *Origanum vulgare* | День | Lindman, № 91 |
 | 7 | Шиповник коричный | *Rosa cinnamomea* | День | Lindman, № 293 |
 | 8 | Мелисса | *Melissa officinalis* | День | Köhler's Medizinal-Pflanzen, найдена |
-| 9 | Иван-чай | *Chamaenerion angustifolium* | Вечер | ищем, см. раздел 7 |
+| 9 | Иван-чай | *Chamaenerion angustifolium* | Вечер | Thomé, Flora von Deutschland (1885) |
 | 10 | Вереск | *Calluna vulgaris* | Вечер | Lindman, № 147 |
 | 11 | Таволга вязолистная | *Filipendula ulmaria* | Вечер | Lindman, № 288 |
 | 12 | Брусника | *Vaccinium vitis-idaea* | Вечер | Lindman, № 143 |
 
-Lindman — атлас «Bilder ur Nordens Flora» (1901–1905). Он, Köhler's Medizinal-Pflanzen (1887) и Edwards's Botanical Register (1829–1847) находятся в общественном достоянии и лежат на Викискладе.
+Lindman — атлас «Bilder ur Nordens Flora» (1901–1905). Все пять источников — Lindman, Köhler's Medizinal-Pflanzen (1887), Thomé «Flora von Deutschland» (1885), «The Botanical Magazine» (1793) и «Atlas der Alpenflora» (1882) — находятся в общественном достоянии и лежат на Викискладе.
 
 **Поля травы:** `id` латиницей для адреса, название, латынь, сбор, регион, точка сбора (условные координаты внутри региона), месяцы сбора, вкус и действие одной строкой, описание в две-три фразы, файл гравюры, источник и лицензия.
 
@@ -295,5 +295,5 @@ dolgota/
 
 ## 7. Открытые вопросы
 
-- **Гравюры родиолы и иван-чая** на Викискладе не нашлись. Ищем их в Flora Danica, у Sowerby и у Томе. Если не найдём, заменяем травы: родиолу — на тысячелистник (Lindman, № 14), иван-чай — на ромашку (Lindman, № 12).
+- **Гравюры родиолы и иван-чая** — решено: нашлись в «Atlas der Alpenflora» и у Томе, см. 2.1.
 - **Координаты мест сбора и тексты о травах** пишем при наполнении данных.
