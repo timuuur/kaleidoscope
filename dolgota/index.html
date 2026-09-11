@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Долгота — чай, который идёт за солнцем</title>
+  <meta name="description" content="Учебный проект: три сбора диких трав с Алтая, Кавказа и Карелии — по одному на каждое время суток.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@1,500&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+  <script defer src="js/clock.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/shop.js"></script>
+  <script defer src="data/russia.js"></script>
+  <script defer src="js/atlas.js"></script>
+  <script defer src="js/tin.js"></script>
+  <script defer src="js/fit.js"></script>
+  <script defer src="js/site.js"></script>
+  <script defer src="js/home.js"></script>
+</head>
+<body>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+    <div class="marquee__track cap"><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span><span>доставка по всей России</span><span>·</span><span>подписка −15&nbsp;%</span><span>·</span><span>урожай 2026 года</span><span>·</span></div>
+  </div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html">долгота</a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a class="pill" href="#sbory">Сборы</a>
+      <a class="pill" href="#zavarivanie">Как заваривать</a>
+      <a class="pill" href="herbarium.html">Гербарий</a>
+    </nav>
+    <div class="header-actions">
+      <button class="pill nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-nav-toggle>Меню</button>
+      <button class="pill cart-pill" type="button" data-cart>Корзина (<span data-cart-count>0</span>)</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero__text">
+        <h1 class="h1">Чай, который идёт за&nbsp;солнцем</h1>
+        <p class="lead">Три сбора диких трав с Алтая, Кавказа и Карелии — по одному на каждое время суток. Солнце на карте подсказывает, какой заварить сейчас.</p>
+        <div class="hero__actions">
+          <a class="btn btn--accent" href="#sbory">Выбрать сбор</a>
+          <a class="btn btn--ghost" href="#dolgoty">Как это устроено</a>
+        </div>
+      </div>
+      <div class="hero__now mono" aria-live="polite">
+        <span data-now-time></span>
+        <span class="muted" data-now-place></span>
+        <button class="pill pill--outline" type="button" data-reset hidden>Вернуться к моему времени</button>
+      </div>
+    </section>
+
+    <div class="hero__map">
+      <svg class="atlas" data-hero-atlas role="group" aria-label="Карта России: солнце показывает, чей сейчас сбор"></svg>
+      <p class="hero__hint mono muted">потяни солнце, чтобы увидеть другое время суток</p>
+    </div>
+
+    <div class="ticker cap" aria-label="Свойства сборов">
+      <span>дикий сбор</span><span>ручная сушка</span><span>без ароматизаторов</span><span>12 трав</span><span>3 региона</span>
+    </div>
+
+    <section class="section" id="sbory">
+      <div class="section-head">
+        <h2 class="h2">Три сбора — три времени суток</h2>
+        <p class="lead">В каждом четыре травы одного региона. Ничего, кроме трав.</p>
+      </div>
+      <div class="blends" data-blends></div>
+    </section>
+
+    <section class="section" id="dolgoty">
+      <div class="section-head">
+        <h2 class="h2">Три долготы</h2>
+        <p class="lead">Солнце встаёт над Алтаем, в полдень стоит над Кавказом и садится над Карелией. Каждую траву собирают там, где в её час светит солнце.</p>
+      </div>
+      <div class="longitudes" data-longitudes></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="h2">Гербарий</h2>
+        <p class="lead">12 трав из трёх регионов. Гравюры взяты из ботанических атласов XIX и начала XX века.</p>
+      </div>
+      <div class="herb-preview" data-herb-preview></div>
+      <a class="btn btn--ghost" href="herbarium.html">Открыть гербарий →</a>
+    </section>
+
+    <section class="section" id="nabor">
+      <div class="bundle card">
+        <div class="bundle__tins" data-bundle-tins></div>
+        <div class="bundle__body">
+          <h2 class="h2">Набор «Весь день»</h2>
+          <p class="lead">Три банки — утро, день и вечер. Хватает примерно на месяц, если заваривать каждый сбор в его время.</p>
+          <div class="segmented" role="group" aria-label="Как покупать">
+            <button class="pill" type="button" data-plan="once" aria-pressed="false">Разово</button>
+            <button class="pill" type="button" data-plan="sub" aria-pressed="true">Подписка −15&nbsp;%</button>
+          </div>
+          <p class="bundle__price"><span data-bundle-price></span><s class="muted" data-bundle-old></s></p>
+          <p class="mono muted" data-bundle-note></p>
+          <button class="btn btn--accent" type="button" data-add="bundle">В корзину</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="zavarivanie">
+      <div class="section-head"><h2 class="h2">Как заваривать</h2></div>
+      <div class="brew" data-brew></div>
+    </section>
+
+    <section class="section faq">
+      <h2 class="h2">Вопросы</h2>
+      <div class="faq__list">
+        <details><summary>Как устроена подписка?</summary><p>Раз в месяц приходит набор «Весь день» со скидкой 15&nbsp;%. Пропустить месяц или отменить подписку можно в любой момент.</p></details>
+        <details><summary>Что входит в сбор?</summary><p>Только травы, по четыре в каждом сборе. Без ароматизаторов и чайного листа.</p></details>
+        <details><summary>Есть ли противопоказания?</summary><p>Травы действуют мягко, но это не лекарство. Если вы беременны, кормите грудью или принимаете лекарства, посоветуйтесь с врачом.</p></details>
+        <details><summary>Сколько идёт доставка?</summary><p>Нисколько: это учебный проект, и заказы не принимаются. В настоящем магазине здесь были бы сроки и цены доставки.</p></details>
+        <details open><summary>Это настоящий магазин?</summary><p>Нет. «Долгота» — учебный проект для портфолио: бренд вымышленный, заказы не принимаются.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__top">
+      <form class="newsletter" data-newsletter novalidate>
+        <h2 class="h2">Письмо раз в сезон</h2>
+        <p>О новом урожае и о том, как меняется свет.</p>
+        <div class="newsletter__row">
+          <label class="visually-hidden" for="email">Почта</label>
+          <input id="email" name="email" type="email" required placeholder="почта@пример.рф" autocomplete="email">
+          <button class="btn" type="submit">Подписаться</button>
+        </div>
+        <p class="newsletter__note" data-newsletter-message aria-live="polite">Демо: форма проверяет адрес, но ничего не отправляет.</p>
+      </form>
+      <div class="footer-links">
+        <div><span class="cap">Магазин</span><a href="#sbory">Сборы</a><a href="#nabor">Набор «Весь день»</a><a href="#zavarivanie">Как заваривать</a></div>
+        <div><span class="cap">Гербарий</span><a href="herbarium.html">Все травы</a><a href="herbarium.html#istochniki">Источники</a></div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span>Учебный проект: магазин вымышленный, заказы не принимаются · Не является лекарственным средством</span>
+      <span>Гравюры: Lindman, Köhler, Thomé, «The Botanical Magazine», «Atlas der Alpenflora» — общественное достояние · Карта: Natural Earth · Шрифты: Google Fonts</span>
+    </div>
+  </footer>
+
+  <a class="pill sticky-pill" href="#nabor">Подписка −15&nbsp;%</a>
+  <div class="toast" role="status" data-toast hidden></div>
+</body>
+</html>
