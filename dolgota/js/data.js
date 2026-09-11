@@ -18,6 +18,7 @@
       herbs: ['badan', 'rodiola', 'zveroboy', 'myata'],
       brew: { temp: 95, minutes: 7, dose: '1 ч. л. на 250 мл', note: 'Бадану нужна горячая вода и время, чтобы раскрыться.' },
       tin: { body: '#F4C4A1', lid: '#D9704A', text: '#3A2420', line: '#B4502A' },
+      photo: { src: 'img/teas/morning.jpg', alt: 'Стеклянная чашка травяного чая и глиняный чайник на деревянном подносе', author: 'Manki Kim', url: 'https://unsplash.com/photos/clear-glass-cup-with-tea-near-brown-ceramic-teapot-L82-kkEBOd0' },
     },
     {
       id: 'day', name: 'День', region: 'caucasus', lon: 43, promise: 'Ясность и тонус', when: '10:30–16:30',
@@ -25,6 +26,7 @@
       herbs: ['chabrec', 'dushica', 'shipovnik', 'melissa'],
       brew: { temp: 90, minutes: 5, dose: '1 ч. л. на 200 мл', note: 'Чабрец и душица горчат, если передержать.' },
       tin: { body: '#F3D27A', lid: '#C99A12', text: '#2A1F00', line: '#8A6A00' },
+      photo: { src: 'img/teas/day.jpg', alt: 'Кружка травяного чая с лиловыми цветками на льняной салфетке', author: 'Elena Leya', url: 'https://unsplash.com/photos/a-glass-mug-filled-with-tea-next-to-a-bunch-of-flowers-O7sKj9cjZOk' },
     },
     {
       id: 'evening', name: 'Вечер', region: 'karelia', lon: 33, promise: 'Покой и сон', when: 'после 16:30',
@@ -32,6 +34,7 @@
       herbs: ['ivanchay', 'veresk', 'tavolga', 'brusnika'],
       brew: { temp: 85, minutes: 6, dose: '2 ч. л. на 300 мл', note: 'Иван-чай можно заварить второй раз.' },
       tin: { body: '#3B3F6B', lid: '#232644', text: '#F1E9DC', line: '#F09A4E' },
+      photo: { src: 'img/teas/evening.jpg', alt: 'Стеклянная чашка чая с сушёными цветами на тёмном фоне', author: 'Igor Lifar', url: 'https://unsplash.com/photos/clear-glass-teacup-on-saucer-jHMJrp33sUg' },
     },
   ];
 

@@ -20,8 +20,12 @@
 .blends { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
 .blend { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 28px; }
 .blend.is-now { outline: 2px solid var(--ac); outline-offset: -2px; }
-.blend .badge { position: absolute; top: 20px; left: 20px; }
-.blend__tin { display: flex; justify-content: center; padding: 12px 0 8px; }
+/* Банка слева, фото чая справа: фото тянется на высоту банки и обрезается по центру. */
+.blend__visual { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; margin-bottom: 8px; }
+.blend__tin .tin { display: block; width: 130px; height: auto; }
+.blend__photo { position: relative; min-height: 150px; margin: 0; }
+.blend__photo img { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); object-fit: cover; }
+.blend__photo .badge { position: absolute; top: 16px; left: 16px; }
 .blend__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 12px; }
 .blend__title { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
 .blend__when { font-size: 13px; color: var(--mu); }
@@ -85,6 +89,9 @@
   .hero__now { padding: 14px 16px 0; }
   .hero__foot { min-height: 54px; padding: 0 16px 14px; }
   .blend { padding: 24px; }
+  .blend__visual { gap: 12px; }
+  .blend__tin .tin { width: 104px; }
+  .blend__photo { min-height: 120px; }
   .herb-preview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .herb-preview .lat { font-size: 17px; }
   .bundle__tins svg:nth-child(odd) { width: 100px; }

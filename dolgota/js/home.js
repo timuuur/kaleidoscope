@@ -11,8 +11,13 @@
     const region = regionOf(blend);
     const herbs = blend.herbs.map((id) => herbById(id).name.toLowerCase()).join(', ');
     return `<article class="blend card" id="sbor-${blend.id}" data-blend="${blend.id}">
-      <span class="badge" data-now-badge hidden>сейчас его время</span>
-      <div class="blend__tin">${tin.tinSvg({ name: blend.name, lon: blend.lon, regionName: region.name, tin: blend.tin }, 170)}</div>
+      <div class="blend__visual">
+        <div class="blend__tin">${tin.tinSvg({ name: blend.name, lon: blend.lon, regionName: region.name, tin: blend.tin }, 130)}</div>
+        <figure class="blend__photo mat">
+          <img src="${blend.photo.src}" alt="${blend.photo.alt}" width="640" height="640" loading="lazy">
+          <span class="badge" data-now-badge hidden>сейчас его время</span>
+        </figure>
+      </div>
       <div class="blend__head"><h3 class="blend__title">${blend.name} · ${region.name}</h3><span class="blend__when mono">${blend.when}</span></div>
       <p class="blend__promise">${blend.promise}</p>
       <p class="blend__mood">${blend.mood}</p>

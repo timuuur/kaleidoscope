@@ -32,4 +32,4 @@
 
 ## Источники
 
-Гравюры — общественное достояние (Викисклад): C. A. M. Lindman «Bilder ur Nordens Flora», F. E. Köhler «Köhler’s Medizinal-Pflanzen», O. W. Thomé «Flora von Deutschland», «The Botanical Magazine», «Atlas der Alpenflora». Карта — Natural Earth. Шрифты — Manrope, JetBrains Mono, Cormorant Garamond (Google Fonts).
+Гравюры — общественное достояние (Викисклад): C. A. M. Lindman «Bilder ur Nordens Flora», F. E. Köhler «Köhler’s Medizinal-Pflanzen», O. W. Thomé «Flora von Deutschland», «The Botanical Magazine», «Atlas der Alpenflora». Фото чая — Manki Kim, Elena Leya, Igor Lifar ([Unsplash](https://unsplash.com/license), лицензия Unsplash), ссылки на кадры — в `js/data.js`. Карта — Natural Earth. Шрифты — Manrope, JetBrains Mono, Cormorant Garamond (Google Fonts).
