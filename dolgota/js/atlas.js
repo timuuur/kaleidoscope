@@ -117,8 +117,15 @@
       html += `<text class="atlas-region-label" x="${(x + (below ? 0 : 12)).toFixed(1)}" y="${(y + (below ? 26 : 5)).toFixed(1)}" text-anchor="${below ? 'middle' : 'start'}">${region.name}</text>`;
     }
     if (mode === 'hero') {
+      // Лучи — чтобы с первого взгляда было видно: это солнце, и его можно взять. Длинные чередуются с короткими.
+      const rays = Array.from({ length: 12 }, (_, i) => {
+        const angle = (i * Math.PI) / 6;
+        const [cos, sin] = [Math.cos(angle), Math.sin(angle)];
+        const outer = i % 2 ? 22 : 26;
+        return `<line x1="${(cos * 18).toFixed(1)}" y1="${(sin * 18).toFixed(1)}" x2="${(cos * outer).toFixed(1)}" y2="${(sin * outer).toFixed(1)}"/>`;
+      }).join('');
       html += '<g class="atlas-sun" tabindex="0" role="slider" aria-label="Солнце: время суток" aria-valuemin="300" aria-valuemax="1380">'
-        + '<circle class="atlas-sun-halo" r="26"/><circle class="atlas-sun-disc" r="16"/></g>';
+        + `<circle class="atlas-sun-halo" r="30"/><g class="atlas-sun-rays">${rays}</g><circle class="atlas-sun-disc" r="13"/></g>`;
     }
     svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
     svg.innerHTML = html;
@@ -181,6 +188,7 @@
       let dragging = false;
       sunEl.addEventListener('pointerdown', (event) => {
         dragging = true;
+        sunEl.classList.add('is-dragging', 'is-used');
         sunEl.setPointerCapture(event.pointerId);
         event.preventDefault();
       });
@@ -191,7 +199,7 @@
         const p = toSvgPoint(event);
         onDrag(nearestMinute(samples, p.x, p.y));
       });
-      const stop = () => { dragging = false; };
+      const stop = () => { dragging = false; sunEl.classList.remove('is-dragging'); };
       sunEl.addEventListener('pointerup', stop);
       sunEl.addEventListener('pointercancel', stop);
       sunEl.addEventListener('keydown', (event) => {
@@ -203,6 +211,7 @@
         if (event.key === 'End') next = 1380;
         if (next === null) return;
         event.preventDefault();
+        sunEl.classList.add('is-used');
         onDrag(Math.max(300, Math.min(1380, next)));
       });
     }

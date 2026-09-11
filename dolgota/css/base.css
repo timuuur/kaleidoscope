@@ -34,7 +34,13 @@ h1, h2, h3, p { margin: 0; }
 .ticker { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 28px; margin-top: 48px; padding: 16px var(--page-pad); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
 .site-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 20px var(--page-pad); }
-.logo { font-size: 22px; font-weight: 700; letter-spacing: 0.06em; text-decoration: none; }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; letter-spacing: 0.06em; text-decoration: none; }
+/* Логотип-компас: кольцо и стрелка цвета текста, северная половина стрелки — акцент времени суток. */
+.logo__mark { flex: none; width: 26px; height: 26px; }
+.logo__ring, .logo__ticks { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+.logo__north { fill: var(--ac); transition: var(--theme-transition); }
+.logo__south { fill: currentColor; }
+.logo__pin { fill: var(--bg); transition: var(--theme-transition); }
 .nav { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: var(--card); transition: var(--theme-transition); }
 .cart-pill { background: var(--card); }
 .header-actions { display: flex; gap: 6px; }
@@ -64,9 +70,16 @@ h1, h2, h3, p { margin: 0; }
 .atlas-herb.is-active { fill: var(--ac); r: 7px; }
 .atlas-sun { cursor: grab; touch-action: none; outline: none; }
 .atlas-sun:active { cursor: grabbing; }
-.atlas-sun:focus-visible .atlas-sun-halo { stroke-opacity: 1; stroke-width: 4; }
-.atlas-sun-halo { fill: none; stroke: var(--sun); stroke-opacity: 0.45; stroke-width: 2; pointer-events: all; }
+/* Невидимый круг побольше — за него удобно хватать пальцем; при фокусе с клавиатуры он становится рамкой. */
+.atlas-sun-halo { fill: none; stroke: var(--sun); stroke-opacity: 0; stroke-width: 2; pointer-events: all; }
+.atlas-sun:focus-visible .atlas-sun-halo { stroke-opacity: 1; }
 .atlas-sun-disc { fill: var(--sun); }
+/* Лучи подмешивают цвет текста, чтобы не теряться ни на светлой суше днём, ни на тёмной ночью.
+   Пока солнце не трогали, лучи «дышат»; при наведении и перетаскивании вытягиваются. */
+.atlas-sun-rays { stroke: color-mix(in srgb, var(--sun) 65%, var(--ink)); stroke-width: 2.5; stroke-linecap: round; transform-box: fill-box; transform-origin: center; transition: transform 0.25s ease, stroke 0.6s ease; animation: sun-call 2.4s ease-in-out infinite; }
+.atlas-sun:hover .atlas-sun-rays, .atlas-sun.is-dragging .atlas-sun-rays { transform: scale(1.18); animation: none; }
+.atlas-sun.is-used .atlas-sun-rays { animation: none; }
+@keyframes sun-call { 50% { transform: scale(1.12); } }
 .atlas-sun.is-night { opacity: 0.5; }
 
 .site-footer { margin: clamp(64px, 8vw, 120px) clamp(12px, 1.7vw, 24px) clamp(12px, 1.7vw, 24px); padding: clamp(28px, 4vw, 56px); border-radius: var(--radius-hero); background: var(--ink); color: var(--bg); display: flex; flex-direction: column; gap: 40px; transition: var(--theme-transition); }
@@ -86,8 +99,16 @@ html .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s
 html .reveal.is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
+  .atlas-sun-rays { animation: none; transition: none; }
   .marquee__track { animation: none; }
   html .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Компас прибавил шапке ширины: до 760 px логотип и «таблетки» компактнее, чтобы шапка оставалась в одну строку. */
+@media (max-width: 760px) {
+  .logo { gap: 8px; font-size: 20px; }
+  .logo__mark { width: 22px; height: 22px; }
+  .site-header .pill { padding: 0 12px; }
 }
 
 @media (max-width: 640px) {
