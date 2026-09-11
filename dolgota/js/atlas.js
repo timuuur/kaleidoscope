@@ -184,6 +184,8 @@
         sunEl.setPointerCapture(event.pointerId);
         event.preventDefault();
       });
+      // На телефоне страница не должна прокручиваться, пока палец тянет солнце.
+      sunEl.addEventListener('touchstart', (event) => event.preventDefault(), { passive: false });
       sunEl.addEventListener('pointermove', (event) => {
         if (!dragging) return;
         const p = toSvgPoint(event);
@@ -210,14 +212,12 @@
       const sun = clock.sunAt(min);
       const blend = clock.blendAt(min);
       regionEls.forEach((el) => el.classList.toggle('is-active', el.dataset.blend === blend));
-      sunEl.style.display = sun.visible ? '' : 'none';
-      if (sun.visible) {
-        const [x, y] = at([sun.lon, sun.lat]);
-        sunEl.setAttribute('transform', `translate(${x} ${y})`);
-        setMeridian(Math.round(sun.lon / 15) * 15);
-      } else {
-        setMeridian(null);
-      }
+      // Ночью солнце не прячем: оно ждёт бледным у конца пути, чтобы его всегда можно было потянуть.
+      const shown = sun.visible ? sun : clock.sunAt(min < 300 ? 300 : 1380);
+      const [x, y] = at([shown.lon, shown.lat]);
+      sunEl.setAttribute('transform', `translate(${x} ${y})`);
+      sunEl.classList.toggle('is-night', !sun.visible);
+      setMeridian(sun.visible ? Math.round(sun.lon / 15) * 15 : null);
       sunEl.setAttribute('aria-valuenow', String(Math.max(300, Math.min(1380, min))));
       sunEl.setAttribute('aria-valuetext', `${clock.formatTime(min)}, время сбора «${blendNames[blend] || blend}»`);
     }

@@ -65,8 +65,9 @@ h1, h2, h3, p { margin: 0; }
 .atlas-sun { cursor: grab; touch-action: none; outline: none; }
 .atlas-sun:active { cursor: grabbing; }
 .atlas-sun:focus-visible .atlas-sun-halo { stroke-opacity: 1; stroke-width: 4; }
-.atlas-sun-halo { fill: none; stroke: var(--sun); stroke-opacity: 0.45; stroke-width: 2; }
+.atlas-sun-halo { fill: none; stroke: var(--sun); stroke-opacity: 0.45; stroke-width: 2; pointer-events: all; }
 .atlas-sun-disc { fill: var(--sun); }
+.atlas-sun.is-night { opacity: 0.5; }
 
 .site-footer { margin: clamp(64px, 8vw, 120px) clamp(12px, 1.7vw, 24px) clamp(12px, 1.7vw, 24px); padding: clamp(28px, 4vw, 56px); border-radius: var(--radius-hero); background: var(--ink); color: var(--bg); display: flex; flex-direction: column; gap: 40px; transition: var(--theme-transition); }
 .site-footer__top { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 40px; }
