@@ -54,7 +54,7 @@
     const blend = data.blends.find((b) => b.id === herb.blend);
     const months = data.monthNames.map((name, i) => `<span class="month${herb.months.includes(i + 1) ? ' is-on' : ''}" title="${name}">${name[0]}</span>`).join('');
     return `<div class="herb-dialog__grid">
-      <img src="${herb.image}" alt="Гравюра: ${herb.name.toLowerCase()}" width="400" height="500">
+      <div class="mat"><img src="${herb.image}" alt="Гравюра: ${herb.name.toLowerCase()}" width="400" height="500"></div>
       <div class="herb-dialog__body">
         <div><h2 id="herb-title">${herb.name}</h2><span class="lat">${herb.latin}</span></div>
         <span class="mono">${regionOf(herb).name} · ${coordsText(herb.coords)}</span>

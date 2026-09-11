@@ -38,7 +38,7 @@
   // Превью гербария.
   $('[data-herb-preview]').innerHTML = ['badan', 'chabrec', 'veresk', 'zveroboy'].map((id) => {
     const herb = herbById(id);
-    return `<figure><img src="${herb.image}" alt="Гравюра: ${herb.name.toLowerCase()}" width="400" height="500" loading="lazy">
+    return `<figure><div class="mat"><img src="${herb.image}" alt="Гравюра: ${herb.name.toLowerCase()}" width="400" height="500" loading="lazy"></div>
       <figcaption><span class="name">${herb.name}</span><br><span class="lat">${herb.latin}</span></figcaption></figure>`;
   }).join('');
 

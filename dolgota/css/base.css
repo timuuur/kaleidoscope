@@ -41,7 +41,9 @@ h1, h2, h3, p { margin: 0; }
 .nav-toggle { display: none; background: var(--card); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.card { background: var(--card); border-radius: var(--radius-card); transition: var(--theme-transition); }
+.card { background: var(--card); border-radius: var(--radius-card); box-shadow: var(--shadow-soft); transition: var(--theme-transition); }
+.mat { padding: 12px; border-radius: 16px; background: var(--mat); box-shadow: var(--shadow-soft); transition: var(--theme-transition); }
+.mat img { display: block; width: 100%; height: auto; border-radius: 6px; outline: 1px solid var(--mat-line); }
 .badge { align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: var(--ac); color: var(--on); font: 12px/1 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
 .toast { position: fixed; left: 50%; bottom: 24px; z-index: 10; max-width: calc(100vw - 32px); padding: 14px 20px; border-radius: 999px; background: var(--ink); color: var(--bg); font-size: 14px; text-align: center; transform: translateX(-50%); }
 .sticky-pill { position: fixed; right: 20px; bottom: 20px; z-index: 5; background: var(--ink); color: var(--bg); }
@@ -77,8 +79,13 @@ h1, h2, h3, p { margin: 0; }
 .footer-links a { text-decoration: none; }
 .footer-legal { display: flex; flex-direction: column; gap: 8px; padding-top: 24px; border-top: 1px solid color-mix(in srgb, var(--bg) 20%, transparent); font: 12px/1.5 var(--font-mono); color: color-mix(in srgb, var(--bg) 72%, transparent); }
 
+/* Появление при прокрутке: классы ставит и снимает site.js. html — чтобы перебить transition компонентов. */
+html .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+html .reveal.is-visible { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   .marquee__track { animation: none; }
+  html .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 @media (max-width: 640px) {
