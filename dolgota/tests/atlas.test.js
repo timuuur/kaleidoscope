@@ -34,3 +34,10 @@ test('pathD и lineD строят атрибут d', () => {
   assert.equal(atlas.pathD([[[0, 0], [1, 0], [1, 1]]], toXY), 'M0.0,0.0L1.0,0.0L1.0,1.0Z');
   assert.equal(atlas.lineD([[0, 0], [2, 3]], toXY), 'M0.0,0.0L2.0,3.0');
 });
+
+test('nearestMinute выбирает ближайшую точку пути солнца', () => {
+  const samples = [{ min: 300, x: 0, y: 0 }, { min: 305, x: 10, y: 0 }, { min: 310, x: 20, y: 0 }];
+  assert.equal(atlas.nearestMinute(samples, 11, 3), 305);
+  assert.equal(atlas.nearestMinute(samples, -50, 0), 300);
+  assert.equal(atlas.nearestMinute(samples, 99, 99), 310);
+});

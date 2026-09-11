@@ -54,5 +54,158 @@
     return rings.map((ring) => lineD(ring, toXY) + 'Z').join('');
   }
 
-  return { project, projector, inside, pathD, lineD };
+  function nearestMinute(samples, x, y) {
+    let best = samples[0];
+    let bestDistance = Infinity;
+    for (const sample of samples) {
+      const d = (sample.x - x) ** 2 + (sample.y - y) ** 2;
+      if (d < bestDistance) { bestDistance = d; best = sample; }
+    }
+    return best.min;
+  }
+
+  function meridianPoints(lon) {
+    const points = [];
+    for (let lat = 38; lat <= 82; lat += 2) points.push([lon, lat]);
+    return points;
+  }
+
+  function graticule(toXY) {
+    let out = '';
+    for (let lon = 30; lon <= 180; lon += 15) out += `<path class="atlas-grid" d="${lineD(meridianPoints(lon), toXY)}"/>`;
+    for (const lat of [50, 60, 70, 80]) {
+      const points = [];
+      for (let lon = 15; lon <= 195; lon += 3) points.push([lon, lat]);
+      out += `<path class="atlas-grid" d="${lineD(points, toXY)}"/>`;
+    }
+    return out;
+  }
+
+  function createAtlas(svg, options) {
+    const { mode = 'hero', width, height, pad = 24, rings, regions = [], herbs = [], box, meridian, clock, blendNames = {}, onDrag, onPick } = options;
+    const fitPoints = box
+      ? [[box[0], box[1]], [box[2], box[1]], [box[0], box[3]], [box[2], box[3]], [(box[0] + box[2]) / 2, box[1]]]
+      : rings.flat();
+    const toXY = projector(width, height, pad, fitPoints);
+    const at = (point) => toXY(point).map((v) => v.toFixed(1));
+    const labelLat = box ? box[1] + 0.6 : 36.6;
+    const visibleRegions = box
+      ? regions.filter(({ center: [lon, lat] }) => lon >= box[0] && lon <= box[2] && lat >= box[1] && lat <= box[3])
+      : regions;
+
+    let html = `<rect class="atlas-sea" width="${width}" height="${height}"/>`;
+    html += `<path class="atlas-land" d="${pathD(rings, toXY)}"/>` + graticule(toXY);
+    if (mode !== 'mini') html += '<path class="atlas-meridian" d=""/><text class="atlas-meridian-label" text-anchor="middle"></text>';
+
+    const samples = [];
+    if (mode === 'hero') {
+      for (let min = 300; min <= 1380; min += 5) {
+        const sun = clock.sunAt(min);
+        const [x, y] = toXY([sun.lon, sun.lat]);
+        samples.push({ min, x, y });
+      }
+      html += `<path class="atlas-sun-path" d="M${samples.map((s) => `${s.x.toFixed(1)},${s.y.toFixed(1)}`).join('L')}"/>`;
+    }
+    for (const herb of herbs) {
+      const [x, y] = at(herb.coords);
+      html += `<circle class="atlas-herb" data-herb="${herb.id}" cx="${x}" cy="${y}" r="5"><title>${herb.name}</title></circle>`;
+    }
+    for (const region of visibleRegions) {
+      const [x, y] = toXY(region.center);
+      if (!herbs.length) html += `<circle class="atlas-region" data-blend="${region.blend}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6"/>`;
+      const below = region.label === 'below';
+      html += `<text class="atlas-region-label" x="${(x + (below ? 0 : 12)).toFixed(1)}" y="${(y + (below ? 26 : 5)).toFixed(1)}" text-anchor="${below ? 'middle' : 'start'}">${region.name}</text>`;
+    }
+    if (mode === 'hero') {
+      html += '<g class="atlas-sun" tabindex="0" role="slider" aria-label="Солнце: время суток" aria-valuemin="300" aria-valuemax="1380">'
+        + '<circle class="atlas-sun-halo" r="26"/><circle class="atlas-sun-disc" r="16"/></g>';
+    }
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    svg.innerHTML = html;
+
+    const meridianEl = svg.querySelector('.atlas-meridian');
+    const meridianLabel = svg.querySelector('.atlas-meridian-label');
+    const regionEls = [...svg.querySelectorAll('.atlas-region')];
+    const herbEls = [...svg.querySelectorAll('.atlas-herb')];
+    const sunEl = svg.querySelector('.atlas-sun');
+
+    function setMeridian(lon) {
+      if (!meridianEl) return;
+      if (lon === null) {
+        meridianEl.setAttribute('d', '');
+        meridianLabel.textContent = '';
+        return;
+      }
+      meridianEl.setAttribute('d', lineD(meridianPoints(lon), toXY));
+      const [x, y] = at([lon, labelLat]);
+      meridianLabel.setAttribute('x', x);
+      meridianLabel.setAttribute('y', y);
+      meridianLabel.textContent = `${lon}° в. д.`;
+    }
+
+    if (mode === 'fragment') setMeridian(meridian);
+
+    if (herbEls.length && onPick) {
+      herbEls.forEach((el) => el.addEventListener('click', () => onPick(el.dataset.herb)));
+    }
+
+    if (sunEl && onDrag) {
+      const toSvgPoint = (event) => {
+        const point = svg.createSVGPoint();
+        point.x = event.clientX;
+        point.y = event.clientY;
+        return point.matrixTransform(svg.getScreenCTM().inverse());
+      };
+      let dragging = false;
+      sunEl.addEventListener('pointerdown', (event) => {
+        dragging = true;
+        sunEl.setPointerCapture(event.pointerId);
+        event.preventDefault();
+      });
+      sunEl.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        const p = toSvgPoint(event);
+        onDrag(nearestMinute(samples, p.x, p.y));
+      });
+      const stop = () => { dragging = false; };
+      sunEl.addEventListener('pointerup', stop);
+      sunEl.addEventListener('pointercancel', stop);
+      sunEl.addEventListener('keydown', (event) => {
+        const now = Number(sunEl.getAttribute('aria-valuenow'));
+        const steps = { ArrowRight: 15, ArrowUp: 15, ArrowLeft: -15, ArrowDown: -15 };
+        let next = null;
+        if (event.key in steps) next = now + steps[event.key];
+        if (event.key === 'Home') next = 300;
+        if (event.key === 'End') next = 1380;
+        if (next === null) return;
+        event.preventDefault();
+        onDrag(Math.max(300, Math.min(1380, next)));
+      });
+    }
+
+    function update(min) {
+      if (mode !== 'hero') return;
+      const sun = clock.sunAt(min);
+      const blend = clock.blendAt(min);
+      regionEls.forEach((el) => el.classList.toggle('is-active', el.dataset.blend === blend));
+      sunEl.style.display = sun.visible ? '' : 'none';
+      if (sun.visible) {
+        const [x, y] = at([sun.lon, sun.lat]);
+        sunEl.setAttribute('transform', `translate(${x} ${y})`);
+        setMeridian(Math.round(sun.lon / 15) * 15);
+      } else {
+        setMeridian(null);
+      }
+      sunEl.setAttribute('aria-valuenow', String(Math.max(300, Math.min(1380, min))));
+      sunEl.setAttribute('aria-valuetext', `${clock.formatTime(min)}, время сбора «${blendNames[blend] || blend}»`);
+    }
+
+    function highlight(herbId) {
+      herbEls.forEach((el) => el.classList.toggle('is-active', el.dataset.herb === herbId));
+    }
+
+    return { update, highlight };
+  }
+
+  return { project, projector, inside, pathD, lineD, nearestMinute, createAtlas };
 });
