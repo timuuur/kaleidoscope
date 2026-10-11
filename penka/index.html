@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пенка — кофейня после школы</title>
+<meta name="description" content="Кофейня «Пенка»: яркие напитки от 149 ₽, фотозона и розетки. −50% на первый напиток.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800;900&family=Golos+Text:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF6EC;
+    --ink: #1E1030;
+    --pink: #FF4FA3;
+    --lilac: #B79CFF;
+    --lime: #D4FF4F;
+    --orange: #FF8A3D;
+    --sky: #7FD8FF;
+    --white: #fff;
+    --shadow: 6px 6px 0 var(--ink);
+    --radius: 24px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  .hero { overflow: clip; }
+  body {
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--cream);
+    overflow-x: hidden;
+    padding-bottom: 84px;
+  }
+  h1, h2, h3, .display { font-family: "Unbounded", system-ui, sans-serif; line-height: 1.05; overflow-wrap: anywhere; }
+  h2 { font-size: clamp(28px, 5.2vw, 56px); font-weight: 800; margin-bottom: 14px; }
+  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  section { padding: clamp(56px, 9vw, 110px) 0; position: relative; }
+  .lead { font-size: clamp(17px, 2.2vw, 21px); max-width: 620px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(14px, 2vw, 18px);
+    color: var(--ink); background: var(--lime); text-decoration: none; text-align: center;
+    padding: 18px 28px; border: 3px solid var(--ink); border-radius: 999px;
+    box-shadow: var(--shadow); cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 var(--ink); }
+  .btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn.pink { background: var(--pink); color: var(--white); }
+  .btn:focus-visible, button:focus-visible, input:focus-visible { outline: 4px solid var(--orange); outline-offset: 3px; }
+
+  /* шапка */
+  header { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 18px 0; }
+  header .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .logo { font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 24px; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--pink); }
+  .pill { font-weight: 700; font-size: 14px; background: var(--white); border: 2px solid var(--ink); border-radius: 999px; padding: 6px 14px; white-space: nowrap; }
+
+  /* 1. герой */
+  .hero {
+    padding-top: clamp(110px, 16vw, 170px);
+    background:
+      radial-gradient(circle at 12% 20%, #FFD1E8 0 22%, transparent 23%),
+      radial-gradient(circle at 88% 12%, #E4D9FF 0 18%, transparent 19%),
+      radial-gradient(circle at 80% 85%, #FFE2B8 0 24%, transparent 25%),
+      var(--cream);
+  }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: center; }
+  h1 span { white-space: nowrap; }
+  h1 { font-size: clamp(38px, 7vw, 86px); font-weight: 900; letter-spacing: -.02em; margin-bottom: 22px; }
+  h1 span { display: inline-flex; align-items: center; gap: .14em; padding: .1em .22em .1em .12em; border: 3px solid var(--ink); border-radius: 999px; box-shadow: var(--shadow); margin: 0 0 .16em; }
+  h1 img { flex: none; width: 1em; height: 1em; border-radius: 50%; border: 3px solid var(--ink); object-fit: cover; background: var(--white); transition: transform .3s cubic-bezier(.2, 1.6, .4, 1); }
+  h1 span:hover img { transform: scale(1.15) rotate(8deg); }
+  h1 .w1 { background: var(--pink); color: var(--white); transform: rotate(-3deg); }
+  h1 .w2 { background: var(--lime); transform: rotate(2deg); }
+  h1 .w3 { background: var(--lilac); transform: rotate(-1.5deg); }
+  .hero .lead { margin-bottom: 28px; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .hero-note { font-size: 15px; font-weight: 500; }
+
+  .cup-stage { position: relative; display: grid; place-items: center; min-height: 380px; }
+  .cup-stage svg.big { width: min(320px, 78%); height: auto; animation: bob 4s ease-in-out infinite; filter: drop-shadow(8px 10px 0 var(--ink)); }
+  .sticker {
+    position: absolute; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(12px, 1.6vw, 16px);
+    border: 3px solid var(--ink); border-radius: 999px; padding: 10px 16px; box-shadow: 4px 4px 0 var(--ink);
+    animation: bob 5s ease-in-out infinite; white-space: nowrap;
+  }
+  .s1 { background: var(--lime); top: 6%; left: 0; rotate: -10deg; }
+  .s2 { background: var(--sky); bottom: 14%; right: 0; rotate: 8deg; animation-delay: -2s; }
+  .s3 { background: var(--orange); top: 14%; right: 4%; rotate: 12deg; animation-delay: -1s; width: 92px; height: 92px; padding: 0; display: grid; place-items: center; text-align: center; white-space: normal; line-height: 1.1; font-size: 15px; }
+  @keyframes bob { 50% { transform: translateY(-14px); } }
+
+  /* бегущая строка */
+  .marquee { background: var(--ink); color: var(--lime); border-block: 3px solid var(--ink); overflow: hidden; padding: 14px 0; rotate: -1.2deg; width: 104%; margin-left: -2%; }
+  .marquee div { display: flex; gap: 40px; width: max-content; animation: run 22s linear infinite; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(16px, 2.4vw, 24px); white-space: nowrap; }
+  .marquee b { color: var(--pink); }
+  @keyframes run { to { transform: translateX(-50%); } }
+
+  /* 2. причины */
+  .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
+  .card { background: var(--white); border: 3px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); padding: 26px; min-width: 0; }
+  .card .emoji { font-size: 44px; line-height: 1; margin-bottom: 14px; }
+  .card h3 { font-size: clamp(18px, 2.2vw, 22px); font-weight: 800; margin-bottom: 8px; }
+  .card:nth-child(1) { background: #FFE0F0; rotate: -1deg; }
+  .card:nth-child(2) { background: #ECE4FF; rotate: 1deg; }
+  .card:nth-child(3) { background: #F1FFC2; rotate: -.6deg; }
+
+  /* 3. меню */
+  .menu { background: var(--lilac); border-block: 3px solid var(--ink); }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
+  .drink { background: var(--white); border: 3px solid var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; min-width: 0; transition: transform .2s; position: relative; }
+  .drink:hover { transform: translateY(-6px) rotate(-1deg); }
+  .drink .pic { border-radius: 16px; border: 3px solid var(--ink); display: grid; place-items: center; padding: 18px; margin-bottom: 16px; }
+  .drink .pic svg { width: 96px; height: auto; }
+  .drink h3 { font-size: clamp(16px, 1.9vw, 19px); font-weight: 800; margin-bottom: 6px; }
+  .drink p { font-size: 16px; flex: 1; }
+  .drink .row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+  .price { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 22px; white-space: nowrap; }
+  .price s { font-size: 14px; font-weight: 600; opacity: .55; margin-right: 6px; }
+  .want { font: 700 15px "Golos Text", sans-serif; color: var(--ink); background: var(--lime); border: 2px solid var(--ink); border-radius: 999px; padding: 8px 16px; cursor: pointer; text-decoration: none; }
+  .want:hover { background: var(--pink); color: var(--white); }
+  .tag { position: absolute; top: -14px; right: 14px; background: var(--orange); border: 3px solid var(--ink); border-radius: 999px; font-weight: 700; font-size: 13px; padding: 4px 12px; rotate: 6deg; }
+
+  /* 4. квиз */
+  .quiz-box { background: var(--white); border: 3px solid var(--ink); border-radius: 32px; box-shadow: 10px 10px 0 var(--ink); padding: clamp(22px, 4vw, 44px); margin-top: 30px; }
+  .moods { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .mood { font: 700 16px "Golos Text", sans-serif; color: var(--ink); background: var(--cream); border: 3px solid var(--ink); border-radius: 20px; padding: 18px 12px; cursor: pointer; transition: transform .15s, background .15s; min-width: 0; }
+  .mood span { display: block; font-size: 36px; margin-bottom: 6px; }
+  .mood:hover { transform: translateY(-4px); background: #FFE0F0; }
+  .mood[aria-pressed="true"] { background: var(--lime); box-shadow: 4px 4px 0 var(--ink); }
+  .result { margin-top: 24px; padding: 22px; border: 3px dashed var(--ink); border-radius: 20px; background: #FFE0F0; display: none; gap: 18px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .result.show { display: flex; animation: pop .4s cubic-bezier(.2, 1.6, .4, 1); }
+  .result h3 { font-size: clamp(18px, 2.6vw, 26px); font-weight: 800; margin-bottom: 4px; }
+  @keyframes pop { from { transform: scale(.85); opacity: 0; } }
+
+  /* 5. отзывы */
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px; }
+  .review { background: var(--white); border: 3px solid var(--ink); border-radius: 24px 24px 24px 4px; box-shadow: var(--shadow); padding: 22px; min-width: 0; }
+  .review b { display: block; margin-top: 12px; font-size: 15px; }
+  .stars { color: var(--orange); letter-spacing: 2px; margin-bottom: 8px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  .stat { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(14px, 1.8vw, 18px); background: var(--sky); border: 3px solid var(--ink); border-radius: 999px; padding: 10px 20px; }
+
+  /* 6. оффер */
+  .offer { background: var(--pink); color: var(--white); border-block: 3px solid var(--ink); text-align: center; overflow: hidden; }
+  .offer h2 { font-size: clamp(32px, 7vw, 76px); text-shadow: 4px 4px 0 var(--ink); }
+  .offer .lead { margin: 0 auto 26px; }
+  .timer { display: inline-flex; gap: 10px; margin-bottom: 30px; }
+  .timer div { background: var(--ink); color: var(--lime); border-radius: 16px; padding: 12px 8px; width: clamp(72px, 20vw, 96px); font-family: "Unbounded", sans-serif; font-weight: 800; font-size: clamp(24px, 6vw, 36px); line-height: 1; }
+  .timer small { display: block; font: 500 12px "Golos Text", sans-serif; color: var(--white); margin-top: 6px; }
+  .promo-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; max-width: 620px; margin: 0 auto; }
+  .promo-form input { flex: 1 1 220px; min-width: 0; font: 500 18px "Golos Text", sans-serif; padding: 16px 22px; border: 3px solid var(--ink); border-radius: 999px; box-shadow: var(--shadow); color: var(--ink); background: var(--white); }
+  .code { display: none; margin: 0 auto; max-width: 520px; background: var(--white); color: var(--ink); border: 3px dashed var(--ink); border-radius: 24px; padding: 24px; }
+  .code.show { display: block; animation: pop .45s cubic-bezier(.2, 1.6, .4, 1); }
+  .code strong { display: block; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: clamp(30px, 8vw, 52px); color: var(--pink); margin: 6px 0; letter-spacing: .04em; }
+  .fineprint { font-size: 14px; margin-top: 18px; opacity: .9; }
+
+  footer { padding: 40px 0 20px; font-size: 16px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 20px 48px; justify-content: space-between; }
+  footer small { display: block; width: 100%; opacity: .6; font-size: 13px; }
+
+  /* липкая кнопка */
+  .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--ink); color: var(--white); padding: 12px 16px; display: flex; gap: 14px; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; }
+  .sticky .btn { padding: 12px 20px; font-size: 14px; box-shadow: 3px 3px 0 var(--pink); white-space: nowrap; }
+
+  .confetti { position: fixed; top: -40px; z-index: 50; font-size: 28px; pointer-events: none; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+  .reveal { opacity: 0; translate: 0 30px; transition: opacity .6s, translate .6s; }
+  .reveal.in { opacity: 1; translate: 0 0; }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    h1 { font-size: min(10.5vw, 80px); }
+    .cup-stage { min-height: 300px; order: -1; }
+    .cup-stage svg.big { width: 200px; }
+    .cards3, .menu-grid, .reviews { grid-template-columns: 1fr; }
+    .moods { grid-template-columns: repeat(2, 1fr); }
+    .sticky span { display: none; }
+    .card, .card:nth-child(n) { rotate: 0deg; }
+  }
+  @media (min-width: 861px) and (max-width: 1020px) {
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; translate: 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="cup" viewBox="0 0 120 150">
+    <path d="M60 6 L66 6 L74 44 L68 44 Z" fill="var(--straw, #FF4FA3)" stroke="#1E1030" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M22 50 Q22 26 60 26 Q98 26 98 50 Z" fill="var(--foam, #fff)" stroke="#1E1030" stroke-width="4" stroke-linejoin="round"/>
+    <rect x="14" y="46" width="92" height="14" rx="7" fill="#fff" stroke="#1E1030" stroke-width="4"/>
+    <path d="M22 60 L32 140 Q33 146 40 146 L80 146 Q87 146 88 140 L98 60 Z" fill="var(--drink, #C98A5A)" stroke="#1E1030" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M27 92 L93 92 L90 118 L30 118 Z" fill="#fff" opacity=".85"/>
+    <circle cx="50" cy="104" r="3.5" fill="#1E1030"/><circle cx="70" cy="104" r="3.5" fill="#1E1030"/>
+    <path d="M54 109 Q60 115 66 109" fill="none" stroke="#1E1030" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="43" cy="110" r="4" fill="#FF4FA3" opacity=".6"/><circle cx="77" cy="110" r="4" fill="#FF4FA3" opacity=".6"/>
+  </symbol>
+</svg>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">пен<span>ка</span>☁️</a>
+    <span class="pill">📍 5&nbsp;минут от&nbsp;школы</span>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 1. Внимание -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1><span class="w1"><img src="img/face1.png" alt="" style="object-position:50% 45%">Сладко.</span> <span class="w2"><img src="img/face2.png" alt="" style="object-position:25% 40%">Ярко.</span> <span class="w3"><img src="img/face3.png" alt="" style="object-position:50% 40%">Твоё.</span></h1>
+        <p class="lead">Кофейня «Пенка»&nbsp;— напитки от&nbsp;149&nbsp;₽, которые красивее твоей ленты. Заходи после уроков: есть розетки, плейлист и&nbsp;место для всей компании.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#offer">Забрать −50% на&nbsp;первый напиток →</a>
+          <span class="hero-note">⭐ 4,9&nbsp;— так нас оценили 1&nbsp;200+&nbsp;гостей</span>
+        </div>
+      </div>
+      <div class="cup-stage" aria-hidden="true">
+        <svg class="big" style="--drink:#FF9CCB;--foam:#FFF;--straw:#D4FF4F"><use href="#cup"/></svg>
+        <span class="sticker s1">no cap, вкусно ✨</span>
+        <span class="sticker s2">от 149&nbsp;₽</span>
+        <span class="sticker s3">−50%<br>today</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div>
+      <span>КЛУБНИЧНАЯ МАТЧА <b>✦</b></span><span>БАБЛ-ГАМ ЛАТТЕ <b>✦</b></span><span>КАКАО С&nbsp;МАРШМЕЛЛОУ <b>✦</b></span><span>РАФ «СОЛЁНАЯ КАРАМЕЛЬ» <b>✦</b></span><span>БЕЗ КОФЕИНА ТОЖЕ ЕСТЬ <b>✦</b></span>
+      <span>КЛУБНИЧНАЯ МАТЧА <b>✦</b></span><span>БАБЛ-ГАМ ЛАТТЕ <b>✦</b></span><span>КАКАО С&nbsp;МАРШМЕЛЛОУ <b>✦</b></span><span>РАФ «СОЛЁНАЯ КАРАМЕЛЬ» <b>✦</b></span><span>БЕЗ КОФЕИНА ТОЖЕ ЕСТЬ <b>✦</b></span>
+    </div>
+  </div>
+
+  <!-- 2. Интерес -->
+  <section>
+    <div class="wrap">
+      <h2 class="reveal">Почему все идут к&nbsp;нам</h2>
+      <p class="lead reveal">Три причины, по&nbsp;которым «Пенка» стала местом встречи после шестого урока.</p>
+      <div class="cards3">
+        <article class="card reveal"><div class="emoji">💸</div><h3>Хватит карманных</h3><p>Любой напиток&nbsp;— от&nbsp;149 до&nbsp;249&nbsp;₽. По&nbsp;школьной карте всегда −10%.</p></article>
+        <article class="card reveal"><div class="emoji">📸</div><h3>Фотозона с&nbsp;зеркалом</h3><p>Розовая стена, неон и&nbsp;кольцевой свет. Сторис получаются с&nbsp;первого дубля.</p></article>
+        <article class="card reveal"><div class="emoji">🔌</div><h3>Сиди сколько хочешь</h3><p>Розетки у&nbsp;каждого стола, быстрый Wi-Fi и&nbsp;тихий угол, чтобы доделать домашку.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Желание -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2 class="reveal">Хиты этой недели</h2>
+      <p class="lead reveal">Цена со&nbsp;скидкой −50%&nbsp;— для первого заказа по&nbsp;промокоду.</p>
+      <div class="menu-grid">
+        <article class="drink reveal"><span class="tag">хит №1</span><div class="pic" style="background:#FFE0F0"><svg style="--drink:#FF9CCB;--foam:#C9F0A8;--straw:#B79CFF"><use href="#cup"/></svg></div><h3>Клубничная матча</h3><p>Матча, клубничное пюре и&nbsp;молочная пенка. Розово-зелёная и&nbsp;очень фотогеничная.</p><div class="row"><span class="price"><s>229&nbsp;₽</s>115&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+        <article class="drink reveal"><div class="pic" style="background:#DDF4FF"><svg style="--drink:#8FD3FF;--foam:#FFD1E8;--straw:#FF8A3D"><use href="#cup"/></svg></div><h3>Бабл-гам латте</h3><p>Холодный латте со&nbsp;вкусом жвачки из&nbsp;детства и&nbsp;голубой пенкой.</p><div class="row"><span class="price"><s>219&nbsp;₽</s>110&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+        <article class="drink reveal"><div class="pic" style="background:#FFEBD2"><svg style="--drink:#D99A5B;--foam:#FFF3DD;--straw:#FF4FA3"><use href="#cup"/></svg></div><h3>Раф «Солёная карамель»</h3><p>Сливочный, сладкий, с&nbsp;карамельной корочкой. Спасает после контрольной.</p><div class="row"><span class="price"><s>249&nbsp;₽</s>125&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+        <article class="drink reveal"><span class="tag">без кофеина</span><div class="pic" style="background:#F1E4D8"><svg style="--drink:#8A5A44;--foam:#FFF;--straw:#D4FF4F"><use href="#cup"/></svg></div><h3>Какао с&nbsp;маршмеллоу</h3><p>Густое какао и&nbsp;гора зефирок, которые мы&nbsp;подпаливаем горелкой.</p><div class="row"><span class="price"><s>149&nbsp;₽</s>75&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+        <article class="drink reveal"><div class="pic" style="background:#ECE4FF"><svg style="--drink:#B79CFF;--foam:#FFF;--straw:#FF4FA3"><use href="#cup"/></svg></div><h3>Лавандовый латте</h3><p>Нежный сиреневый латте на&nbsp;овсяном молоке. Вкус как у&nbsp;весны.</p><div class="row"><span class="price"><s>239&nbsp;₽</s>120&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+        <article class="drink reveal"><span class="tag">без кофеина</span><div class="pic" style="background:#F1FFC2"><svg style="--drink:#FFB36B;--foam:#FFF0A8;--straw:#7FD8FF"><use href="#cup"/></svg></div><h3>Манго-маракуйя</h3><p>Ледяной лимонад с&nbsp;кусочками манго и&nbsp;лопающимися шариками.</p><div class="row"><span class="price"><s>199&nbsp;₽</s>100&nbsp;₽</span><a class="want" href="#offer">Хочу!</a></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Вовлечение -->
+  <section id="quiz">
+    <div class="wrap">
+      <h2 class="reveal">Не знаешь, что взять?</h2>
+      <p class="lead reveal">Выбери своё настроение&nbsp;— подберём напиток за&nbsp;один тап.</p>
+      <div class="quiz-box reveal">
+        <div class="moods">
+          <button class="mood" aria-pressed="false" data-name="Раф «Солёная карамель»" data-why="Сладкий заряд, чтобы дожить до вечера." data-price="125"><span>😴</span>Семь уроков позади</button>
+          <button class="mood" aria-pressed="false" data-name="Клубничная матча" data-why="Самый красивый стакан в меню — для сторис." data-price="115"><span>💅</span>Хочу красивое</button>
+          <button class="mood" aria-pressed="false" data-name="Какао с маршмеллоу" data-why="Тёплое, уютное и совсем без кофеина." data-price="75"><span>🧸</span>Без кофеина</button>
+          <button class="mood" aria-pressed="false" data-name="Манго-маракуйя" data-why="Ледяной лимонад с лопающимися шариками." data-price="100"><span>🥵</span>Жарко!</button>
+        </div>
+        <div class="result" id="result" aria-live="polite">
+          <div><h3 id="r-name"></h3><p id="r-why"></p></div>
+          <a class="btn pink" href="#offer">Взять за&nbsp;<span id="r-price"></span>&nbsp;₽ →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Доверие -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2 class="reveal">Что говорят гости</h2>
+      <div class="reviews">
+        <article class="review reveal"><div class="stars">★★★★★</div><p>«Пришли ради фотозоны, остались из-за какао. Теперь это наше место после школы».</p><b>Соня, 9&nbsp;«Б»</b></article>
+        <article class="review reveal"><div class="stars">★★★★★</div><p>«Клубничная матча&nbsp;— любовь. И&nbsp;бариста запомнили моё имя со&nbsp;второго раза!»</p><b>Алина, 10&nbsp;«А»</b></article>
+        <article class="review reveal"><div class="stars">★★★★★</div><p>«Делаем тут проект всей группой: розетки есть, никто не&nbsp;выгоняет, вкусно и&nbsp;недорого».</p><b>Даша, 8&nbsp;«В»</b></article>
+      </div>
+      <div class="stats reveal">
+        <span class="stat">⭐ 4,9 из&nbsp;5</span><span class="stat">1&nbsp;200+ отзывов</span><span class="stat">300&nbsp;напитков в&nbsp;день</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Действие -->
+  <section class="offer" id="offer">
+    <div class="wrap">
+      <h2>−50% на&nbsp;первый напиток</h2>
+      <p class="lead">Напиши имя&nbsp;— и&nbsp;получи промокод. Покажи его бариста сегодня, пока тикает таймер.</p>
+      <div class="timer" aria-label="До конца акции">
+        <div><b id="t-h">00</b><small>часов</small></div>
+        <div><b id="t-m">00</b><small>минут</small></div>
+        <div><b id="t-s">00</b><small>секунд</small></div>
+      </div>
+      <form class="promo-form" id="form">
+        <input id="name" type="text" maxlength="20" placeholder="Как тебя зовут?" aria-label="Твоё имя" required>
+        <button class="btn" type="submit">Получить промокод 🎁</button>
+      </form>
+      <div class="code" id="code" aria-live="polite">
+        <span id="hello"></span>
+        <strong>PENKA50</strong>
+        <span>Покажи экран бариста&nbsp;— скидка 50% на&nbsp;любой напиток.</span>
+      </div>
+      <p class="fineprint">Имя никуда не&nbsp;отправляется&nbsp;— оно нужно только для подписи на&nbsp;стакане.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>📍 Адрес</b><br>ул.&nbsp;Школьная,&nbsp;12</div>
+    <div><b>🕗 Работаем</b><br>каждый день, 8:00–21:00</div>
+    <div><b>💬 Соцсети</b><br>@penka.coffee</div>
+    <small>Учебный демо-сайт: кофейня, адрес, отзывы и&nbsp;цифры вымышлены.</small>
+  </div>
+</footer>
+
+<div class="sticky">
+  <span>🔥 Сегодня −50% на&nbsp;первый напиток</span>
+  <a class="btn" href="#offer">Забрать скидку</a>
+</div>
+
+<script>
+  // появление блоков при прокрутке
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+  // квиз
+  const moods = document.querySelectorAll('.mood');
+  moods.forEach((btn) => btn.addEventListener('click', () => {
+    moods.forEach((b) => b.setAttribute('aria-pressed', b === btn));
+    document.getElementById('r-name').textContent = 'Твой напиток — ' + btn.dataset.name;
+    document.getElementById('r-why').textContent = btn.dataset.why;
+    document.getElementById('r-price').textContent = btn.dataset.price;
+    const box = document.getElementById('result');
+    box.classList.remove('show');
+    void box.offsetWidth;
+    box.classList.add('show');
+  }));
+
+  // таймер до конца дня
+  const pad = (n) => String(n).padStart(2, '0');
+  function tick() {
+    const now = new Date();
+    const end = new Date(now); end.setHours(24, 0, 0, 0);
+    const left = Math.floor((end - now) / 1000);
+    document.getElementById('t-h').textContent = pad(Math.floor(left / 3600));
+    document.getElementById('t-m').textContent = pad(Math.floor(left % 3600 / 60));
+    document.getElementById('t-s').textContent = pad(left % 60);
+  }
+  tick(); setInterval(tick, 1000);
+
+  // промокод и конфетти
+  function confetti() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bits = ['💖', '✨', '☕', '🍓', '⭐', '🎀'];
+    for (let i = 0; i < 36; i++) {
+      const el = document.createElement('span');
+      el.className = 'confetti';
+      el.textContent = bits[i % bits.length];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = 1.8 + Math.random() * 1.8 + 's';
+      el.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4500);
+    }
+  }
+  document.getElementById('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    document.getElementById('hello').textContent = name + ', твой промокод:';
+    e.target.style.display = 'none';
+    document.getElementById('code').classList.add('show');
+    confetti();
+  });
+</script>
+</body>
+</html>
